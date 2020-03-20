@@ -1,7 +1,7 @@
 package com.piotrekwitkowski.lbraryreader;
 
-public class ByteUtils {
-    public static byte[] hexStringToByteArray(String s) throws IllegalArgumentException {
+class ByteUtils {
+    static byte[] hexStringToByteArray(String s) throws IllegalArgumentException {
         int len = s.length();
         if (len % 2 == 1) {
             throw new IllegalArgumentException("Hex string must have even number of characters");
@@ -15,7 +15,7 @@ public class ByteUtils {
         return data;
     }
 
-    public static String byteArrayToHexString(byte[] bytes) {
+    static String byteArrayToHexString(byte[] bytes) {
         final char[] hexArray = {'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
         char[] hexChars = new char[bytes.length * 2]; // Each byte has two hex characters (nibbles)
         int v;

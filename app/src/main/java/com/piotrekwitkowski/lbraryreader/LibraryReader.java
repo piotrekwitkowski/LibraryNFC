@@ -6,11 +6,11 @@ import android.util.Log;
 import java.io.IOException;
 
 class LibraryReader {
-    private String TAG = "LibraryReader";
+    private static final String TAG = "LibraryReader";
 
     // TODO: change ID to F...
     // see: https://stackoverflow.com/questions/27533193/android-hce-are-there-rules-for-aid
-    private final String HCE_AID = "A0000002471001";
+    private static final String HCE_AID = "A0000002471001";
 
     void processTag(Tag tag) {
         Log.i(TAG, "processTag called");
