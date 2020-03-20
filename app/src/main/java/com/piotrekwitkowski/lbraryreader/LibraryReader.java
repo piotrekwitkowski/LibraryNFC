@@ -1,7 +1,6 @@
 package com.piotrekwitkowski.lbraryreader;
 
 import android.nfc.Tag;
-import android.nfc.tech.IsoDep;
 import android.util.Log;
 
 import java.io.IOException;
