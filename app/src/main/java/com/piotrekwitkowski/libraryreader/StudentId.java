@@ -10,6 +10,7 @@ import com.piotrekwitkowski.libraryreader.nfc.DESFireException;
 import com.piotrekwitkowski.libraryreader.nfc.HCE;
 import com.piotrekwitkowski.libraryreader.nfc.Iso7816;
 import com.piotrekwitkowski.libraryreader.nfc.IsoDep;
+import com.piotrekwitkowski.libraryreader.nfc.Response;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -33,8 +34,8 @@ class StudentId {
         if (idForm == StudentId.idForm.PHYSICAL) {
             return new StudentId(isoDep);
         } else if (idForm == StudentId.idForm.HCE) {
-            byte[] selectResponse = HCE.selectAndroidApp(isoDep);
-            if (Arrays.equals(selectResponse, Iso7816.RESPONSE_SUCCESS)) {
+            Response response = HCE.selectAndroidApp(isoDep);
+            if (Arrays.equals(response.getBytes(), Iso7816.RESPONSE_SUCCESS)) {
                 return new StudentId(isoDep);
             } else {
                 throw new StudentIdException("HCE Mobile Application select was unsuccessful");

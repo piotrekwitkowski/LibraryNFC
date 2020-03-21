@@ -22,11 +22,19 @@ public class IsoDep {
         mIsoDep.connect();
     }
 
-    byte[] transceive(byte[] data) throws IOException {
+    Response transceive(byte command, byte data) throws IOException {
+        return transceive(ByteUtils.concatenate(command, data));
+    }
+
+    Response transceive(byte command, byte[] data) throws IOException {
+        return transceive(ByteUtils.concatenate(command, data));
+    }
+
+    Response transceive(byte[] data) throws IOException {
         Log.i(TAG, "--> " + ByteUtils.toHexString(data));
         byte[] response = mIsoDep.transceive(data);
         Log.i(TAG, "<-- " + ByteUtils.toHexString(response));
-        return response;
+        return new Response(response);
     }
 
     public void close() throws IOException {

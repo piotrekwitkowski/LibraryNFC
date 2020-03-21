@@ -56,16 +56,8 @@ public class ByteUtils {
         return rotated;
     }
 
-    static byte firstByte(byte[] response) {
-        return response[0];
-    }
-
     static byte[] last16Bytes(byte[] a) {
         return Arrays.copyOfRange(a,a.length - 16, a.length);
-    }
-
-    static byte[] trimOneFront(byte[] bytes) {
-        return Arrays.copyOfRange(bytes, 1, bytes.length);
     }
 
 }
