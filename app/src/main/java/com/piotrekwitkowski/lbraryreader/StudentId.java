@@ -2,6 +2,8 @@ package com.piotrekwitkowski.lbraryreader;
 
 import android.util.Log;
 
+import com.piotrekwitkowski.lbraryreader.nfc.AID;
+import com.piotrekwitkowski.lbraryreader.nfc.DESFire;
 import com.piotrekwitkowski.lbraryreader.nfc.HCE;
 import com.piotrekwitkowski.lbraryreader.nfc.Iso7816;
 import com.piotrekwitkowski.lbraryreader.nfc.IsoDep;
@@ -16,10 +18,6 @@ class StudentId {
 
     private StudentId(IsoDep isoDep) {
         this.isoDep = isoDep;
-    }
-
-    IsoDep getIsoDep() {
-        return isoDep;
     }
 
     static StudentId getStudentId(IsoDep isoDep) throws Exception {
@@ -57,6 +55,11 @@ class StudentId {
         } else if (historicalBytes.length == 0) {
             return idForm.HCE;
         } else throw new StudentIdException("id form not recognized");
+    }
+
+    void selectApplication(AID aid) throws IOException {
+        byte[] applicationAid = aid.getAid();
+        DESFire.selectApplication(this.isoDep, applicationAid);
     }
 
 
