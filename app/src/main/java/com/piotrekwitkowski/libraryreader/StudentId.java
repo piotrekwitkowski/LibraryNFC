@@ -33,10 +33,11 @@ class StudentId {
             return new StudentId(isoDep);
         } else if (idForm == StudentId.idForm.HCE) {
             byte[] selectResponse = HCE.selectAndroidApp(isoDep);
-            if (!Arrays.equals(selectResponse, Iso7816.RESPONSE_SUCCESS)) {
+            if (Arrays.equals(selectResponse, Iso7816.RESPONSE_SUCCESS)) {
+                return new StudentId(isoDep);
+            } else {
                 throw new StudentIdException("HCE Mobile Application select was unsuccessful");
             }
-            return new StudentId(isoDep);
         } else {
             throw new StudentIdException("id form not supported");
         }
@@ -56,7 +57,9 @@ class StudentId {
             return idForm.PHYSICAL;
         } else if (Arrays.equals(historicalBytes, new byte[]{})) {
             return idForm.HCE;
-        } else throw new StudentIdException("id form not recognized");
+        } else {
+            throw new StudentIdException("id form not recognized");
+        }
     }
 
     void selectApplication(AID aid) throws IOException {
