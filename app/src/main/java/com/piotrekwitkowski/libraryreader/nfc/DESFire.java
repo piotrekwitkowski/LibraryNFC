@@ -42,7 +42,7 @@ public class DESFire {
         // The result is sent to the reader.
         byte[] command = ByteUtils.concatenate(AUTHENTICATE_AES, keyNumber);
         byte[] response = isoDep.transceive(command);
-        byte[] challenge = getChallenge(response);
+        byte[] challenge = ByteUtils.trimOneFront(response);
         Log.i(TAG, "challenge: " + ByteUtils.byteArrayToHexString(challenge));
 
         // 3. The reader receives the 16 bytes, and decrypts it using the AES key to get back the original
@@ -70,7 +70,7 @@ public class DESFire {
         byte[] D = cipher.doFinal(C);
         command = ByteUtils.concatenate(ADDITIONAL_FRAME, D);
         response = isoDep.transceive(command);
-        challenge = getChallenge(response);
+        challenge = ByteUtils.trimOneFront(response);
 
         // 8. The card receives the 32 byte value D and decrypts it with the AES key.
         // 9. The card checks the second 16 bytes match the original random number B (rotated one
@@ -113,7 +113,4 @@ public class DESFire {
         return response[0];
     }
 
-    private static byte[] getChallenge(byte[] response) {
-        return Arrays.copyOfRange(response, 1, 17);
-    }
 }

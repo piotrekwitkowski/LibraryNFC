@@ -62,5 +62,8 @@ public class ByteUtils {
         return Arrays.copyOfRange(a,a.length - howMany, a.length);
     }
 
+    static byte[] trimOneFront(byte[] bytes) {
+        return Arrays.copyOfRange(bytes, 1, bytes.length);
+    }
 
 }
