@@ -18,8 +18,6 @@ import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
-import static com.piotrekwitkowski.libraryreader.nfc.ByteUtils.getLast;
-
 public class DESFire {
     private static final String TAG = "DESFire";
     private static final byte SELECT_APPLICATION = (byte) 0x5A;
@@ -86,7 +84,7 @@ public class DESFire {
         // 11. The card encrypts this rotated A using the AES key and sends it to the reader.
         // 12. The reader receives the 16 bytes and decrypts it. The IV for this is the last 16 bytes the
         // reader sent to the card.
-        byte[] last16Bytes = getLast(command, 16);
+        byte[] last16Bytes = ByteUtils.getLast(command, 16);
         ivParam = new IvParameterSpec(last16Bytes);
         cipher.init(Cipher.DECRYPT_MODE, aes, ivParam);
         byte[] E = cipher.doFinal(challenge);
