@@ -6,8 +6,6 @@ import android.util.Log;
 import com.piotrekwitkowski.lbraryreader.nfc.AID;
 import com.piotrekwitkowski.lbraryreader.nfc.IsoDep;
 
-import java.io.IOException;
-
 class LibraryReader {
     private static final String TAG = "LibraryReader";
     private static final AID LIBRARY = new AID("015548");
