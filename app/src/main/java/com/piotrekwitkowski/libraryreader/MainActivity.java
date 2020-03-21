@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
 import android.os.Bundle;
-import android.util.Log;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements NfcAdapter.ReaderCallback {
     private static final String TAG = "MainActivity";
@@ -14,9 +14,10 @@ public class MainActivity extends AppCompatActivity implements NfcAdapter.Reader
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.i(TAG, "onCreate");
         setContentView(R.layout.activity_main);
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
+        TextView logTextView = findViewById(R.id.log);
+        Log.setLogTextView(logTextView);
     }
 
     @Override
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements NfcAdapter.Reader
 
     @Override
     public void onTagDiscovered(Tag tag) {
-        Log.i(TAG, "onTagDiscovered");
+        Log.reset(TAG, "onTagDiscovered");
         LibraryReader lr = new LibraryReader();
         lr.processTag(tag);
     }

@@ -1,7 +1,6 @@
 package com.piotrekwitkowski.libraryreader;
 
 import android.nfc.Tag;
-import android.util.Log;
 
 import com.piotrekwitkowski.libraryreader.nfc.AESKey;
 import com.piotrekwitkowski.libraryreader.nfc.AID;
