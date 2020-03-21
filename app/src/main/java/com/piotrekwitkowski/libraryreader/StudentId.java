@@ -51,9 +51,9 @@ class StudentId {
         byte[] historicalBytes = isoDep.getHistoricalBytes();
         Log.i(TAG, "historicalBytes: " + ByteUtils.byteArrayToHexString(historicalBytes));
 
-        if (historicalBytes.equals(new byte[]{(byte) 0x80})) {
+        if (Arrays.equals(historicalBytes, new byte[]{(byte) 0x80})) {
             return idForm.PHYSICAL;
-        } else if (historicalBytes.length == 0) {
+        } else if (Arrays.equals(historicalBytes, new byte[]{})) {
             return idForm.HCE;
         } else throw new StudentIdException("id form not recognized");
     }
