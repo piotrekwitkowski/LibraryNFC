@@ -16,14 +16,14 @@
             android:orientation="vertical" >
 
             <TextView
-                android:id="@+id/log"
+                android:id="@+id/logTextView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginBottom="8dp"
-                android:text="Waiting for a card..." />
+                android:text="Hello World!" />
         </LinearLayout>
     </ScrollView>
 

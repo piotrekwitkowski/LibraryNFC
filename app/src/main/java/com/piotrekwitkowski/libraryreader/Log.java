@@ -15,7 +15,7 @@ public class Log {
 
     public static void i(final String tag, final String msg) {
         android.util.Log.i(tag, msg);
-        new Handler(Looper.getMainLooper()).post(() -> logTextView.setText(logTextView.getText() + format(tag, msg) ));
+        new Handler(Looper.getMainLooper()).post(() -> logTextView.setText(logTextView.getText() + format(tag, msg)));
     }
 
     static void reset(final String tag, final String msg) {
