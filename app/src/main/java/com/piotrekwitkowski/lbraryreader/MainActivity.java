@@ -9,7 +9,6 @@ import android.util.Log;
 
 public class MainActivity extends AppCompatActivity implements NfcAdapter.ReaderCallback {
     private static final String TAG = "MainActivity";
-
     private static NfcAdapter nfcAdapter;
 
     @Override
