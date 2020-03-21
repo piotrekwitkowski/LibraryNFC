@@ -95,7 +95,8 @@ public class DESFire {
         // 13. The reader checks this matches the original A random number (rotated one byte left).
         // If this fails then the authentication fails. If it matches, the reader knows the card
         // has the AES key too.
-        if (Arrays.equals(ByteUtils.rotateOneLeft(A), E)) {
+
+        if (!Arrays.equals(ByteUtils.rotateOneLeft(A), E)) {
             throw new DESFireException("authenticateAES failed");
         }
 
