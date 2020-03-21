@@ -69,4 +69,9 @@ class StudentId {
         return DESFire.authenticateAES(this.isoDep, aesKey, keyNumber);
     }
 
+
+    byte[] getFile(byte fileNumber, byte[] offset, byte[] length) throws IOException {
+        return DESFire.getValue(this.isoDep, fileNumber, offset, length);
+    }
+
 }

@@ -24,8 +24,8 @@ public class DESFire {
     private static final byte SELECT_APPLICATION = (byte) 0x5A;
     private static final byte AUTHENTICATE_AES = (byte) 0xAA;
     private static final byte ADDITIONAL_FRAME = (byte) 0xAF;
+    private static final byte GET_VALUE = (byte) 0xBD;
     private static final byte RESPONSE_SUCCESS = (byte) 0x00;
-
 
     private static final int AES_KEY_LENGTH = 16;
 
@@ -111,6 +111,17 @@ public class DESFire {
 
     private static byte getStatusCode(byte[] response) {
         return response[0];
+    }
+
+    public static byte[] getValue(IsoDep isoDep, byte fileNumber, byte[] offset, byte[] length) throws IOException {
+        Log.i(TAG, "getValue()");
+        byte[] command = ByteUtils.concatenate(GET_VALUE, fileNumber);
+        command = ByteUtils.concatenate(command, offset);
+        command = ByteUtils.concatenate(command, length);
+        byte[] response = isoDep.transceive(command);
+        byte[] value = ByteUtils.trimOneFront(response);
+        Log.i(TAG, "value: " + ByteUtils.byteArrayToHexString(value));
+        return response;
     }
 
 }
