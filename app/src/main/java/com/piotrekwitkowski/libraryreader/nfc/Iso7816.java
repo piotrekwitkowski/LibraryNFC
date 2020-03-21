@@ -5,7 +5,7 @@ public class Iso7816 {
 
     final static byte SELECT = (byte) 0xA4;
 //    private final static byte READ_BINARY = (byte) 0xB0;
-//    private final static byteUPDATE_BINARY = (byte) 0xD6;
+//    private final static byte UPDATE_BINARY = (byte) 0xD6;
 //    private final static byte READ_RECORDS = (byte) 0xB2;
 //    private final static byte APPEND_RECORD = (byte) 0xE2;
 //    private final static byte GET_CHALLENGE = (byte) 0x84;
