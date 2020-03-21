@@ -52,7 +52,7 @@ class StudentId {
         Log.i(TAG, "getIdForm()");
 
         byte[] historicalBytes = isoDep.getHistoricalBytes();
-        Log.i(TAG, "historicalBytes: " + ByteUtils.byteArrayToHexString(historicalBytes));
+        Log.i(TAG, "historicalBytes: " + ByteUtils.toHexString(historicalBytes));
 
         if (Arrays.equals(historicalBytes, new byte[]{(byte) 0x80})) {
             return idForm.PHYSICAL;
@@ -66,19 +66,19 @@ class StudentId {
     void selectApplication(AID aid) throws IOException, DESFireException {
         byte[] applicationAid = aid.getAid();
         DESFire.selectApplication(this.isoDep, applicationAid);
-        Log.i(TAG, "Application selected: " + ByteUtils.byteArrayToHexString(applicationAid));
+        Log.i(TAG, "Application selected: " + ByteUtils.toHexString(applicationAid));
     }
 
     void authenticateAES(AESKey key, byte keyNumber) throws Exception {
         byte[] aesKey = key.getKey();
         byte[] sessionKey = DESFire.authenticateAES(this.isoDep, aesKey, keyNumber);
-        Log.i(TAG, "Session key: " + ByteUtils.byteArrayToHexString(sessionKey));
+        Log.i(TAG, "Session key: " + ByteUtils.toHexString(sessionKey));
     }
 
 
     byte[] getValue(byte fileNumber, byte[] offset, byte[] length) throws IOException, DESFireException {
         byte[] value = DESFire.getValue(this.isoDep, fileNumber, offset, length);
-        Log.i(TAG, "File value: " + ByteUtils.byteArrayToHexString(value));
+        Log.i(TAG, "File value: " + ByteUtils.toHexString(value));
         return value;
     }
 

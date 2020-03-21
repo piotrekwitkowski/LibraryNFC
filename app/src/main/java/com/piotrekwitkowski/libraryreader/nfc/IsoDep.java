@@ -23,9 +23,9 @@ public class IsoDep {
     }
 
     byte[] transceive(byte[] data) throws IOException {
-        Log.i(TAG, "--> " + ByteUtils.byteArrayToHexString(data));
+        Log.i(TAG, "--> " + ByteUtils.toHexString(data));
         byte[] response = mIsoDep.transceive(data);
-        Log.i(TAG, "<-- " + ByteUtils.byteArrayToHexString(response));
+        Log.i(TAG, "<-- " + ByteUtils.toHexString(response));
         return response;
     }
 

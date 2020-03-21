@@ -46,7 +46,7 @@ public class DESFire {
         byte[] command = ByteUtils.concatenate(AUTHENTICATE_AES, keyNumber);
         byte[] response = isoDep.transceive(command);
         byte[] challenge = ByteUtils.trimOneFront(response);
-        Log.i(TAG, "challenge: " + ByteUtils.byteArrayToHexString(challenge));
+        Log.i(TAG, "challenge: " + ByteUtils.toHexString(challenge));
 
         // 3. The reader receives the 16 bytes, and decrypts it using the AES key to get back the
         // original 16 byte random number (B). This is decrypted with an IV of all 00 bytes.
@@ -55,7 +55,7 @@ public class DESFire {
         IvParameterSpec ivParam = new IvParameterSpec(new byte[AES_KEY_LENGTH]);
         cipher.init(Cipher.DECRYPT_MODE, aes, ivParam);
         byte[] B = cipher.doFinal(challenge);
-        Log.i(TAG, "cipheredData: " + ByteUtils.byteArrayToHexString(B));
+        Log.i(TAG, "cipheredData: " + ByteUtils.toHexString(B));
 
         // 4. The reader generates its own 16 byte random number (A).
         byte[] A = new byte[AES_KEY_LENGTH];
