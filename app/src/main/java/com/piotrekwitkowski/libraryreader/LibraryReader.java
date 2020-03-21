@@ -24,9 +24,9 @@ class LibraryReader {
         try {
             StudentId studentId = StudentId.getStudentId(isoDep);
             studentId.selectApplication(AID);
-            byte[] sessionKey = studentId.authenticateAES(AES_KEY, KEY_NUMBER);
-            byte[] file = studentId.getFile(FILE_NUMBER, FILE_OFFSET, FILE_LENGTH);
-            byte[] libraryId = Arrays.copyOfRange(file, 11, 22);
+            studentId.authenticateAES(AES_KEY, KEY_NUMBER);
+            byte[] libraryFileValue = studentId.getValue(FILE_NUMBER, FILE_OFFSET, FILE_LENGTH);
+            byte[] libraryId = Arrays.copyOfRange(libraryFileValue, 10, 22);
             Log.i(TAG, "libraryId: " + new String(libraryId));
 
             studentId.close();

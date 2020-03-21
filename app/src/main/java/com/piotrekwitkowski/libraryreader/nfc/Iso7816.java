@@ -18,8 +18,7 @@ public class Iso7816 {
             return apduRequiredPart;
         } else {
             byte[] apduCommandPart = ByteUtils.concatenate((byte) command.length, command);
-            byte[] apdu = ByteUtils.concatenate(apduRequiredPart, apduCommandPart);
-            return apdu;
+            return ByteUtils.concatenate(apduRequiredPart, apduCommandPart);
         }
     }
 

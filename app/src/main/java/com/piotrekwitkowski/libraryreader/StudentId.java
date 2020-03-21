@@ -6,6 +6,7 @@ import com.piotrekwitkowski.libraryreader.nfc.AESKey;
 import com.piotrekwitkowski.libraryreader.nfc.AID;
 import com.piotrekwitkowski.libraryreader.nfc.ByteUtils;
 import com.piotrekwitkowski.libraryreader.nfc.DESFire;
+import com.piotrekwitkowski.libraryreader.nfc.DESFireException;
 import com.piotrekwitkowski.libraryreader.nfc.HCE;
 import com.piotrekwitkowski.libraryreader.nfc.Iso7816;
 import com.piotrekwitkowski.libraryreader.nfc.IsoDep;
@@ -27,7 +28,7 @@ class StudentId {
         isoDep.connect();
 
         idForm idForm = getIdForm(isoDep);
-        Log.i(TAG, "id form: "+ idForm);
+        Log.i(TAG, "ID form: "+ idForm);
 
         if (idForm == StudentId.idForm.PHYSICAL) {
             return new StudentId(isoDep);
@@ -39,7 +40,7 @@ class StudentId {
                 throw new StudentIdException("HCE Mobile Application select was unsuccessful");
             }
         } else {
-            throw new StudentIdException("id form not supported");
+            throw new StudentIdException("ID form not supported");
         }
     }
 
@@ -62,19 +63,23 @@ class StudentId {
         }
     }
 
-    void selectApplication(AID aid) throws IOException {
+    void selectApplication(AID aid) throws IOException, DESFireException {
         byte[] applicationAid = aid.getAid();
         DESFire.selectApplication(this.isoDep, applicationAid);
+        Log.i(TAG, "Application selected: " + ByteUtils.byteArrayToHexString(applicationAid));
     }
 
-    byte[] authenticateAES(AESKey key, byte keyNumber) throws Exception {
+    void authenticateAES(AESKey key, byte keyNumber) throws Exception {
         byte[] aesKey = key.getKey();
-        return DESFire.authenticateAES(this.isoDep, aesKey, keyNumber);
+        byte[] sessionKey = DESFire.authenticateAES(this.isoDep, aesKey, keyNumber);
+        Log.i(TAG, "Session key: " + ByteUtils.byteArrayToHexString(sessionKey));
     }
 
 
-    byte[] getFile(byte fileNumber, byte[] offset, byte[] length) throws IOException {
-        return DESFire.getValue(this.isoDep, fileNumber, offset, length);
+    byte[] getValue(byte fileNumber, byte[] offset, byte[] length) throws IOException, DESFireException {
+        byte[] value = DESFire.getValue(this.isoDep, fileNumber, offset, length);
+        Log.i(TAG, "File value: " + ByteUtils.byteArrayToHexString(value));
+        return value;
     }
 
 }

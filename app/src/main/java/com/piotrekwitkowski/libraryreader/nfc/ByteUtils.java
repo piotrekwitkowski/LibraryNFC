@@ -6,9 +6,9 @@ public class ByteUtils {
 
     static byte[] hexStringToByteArray(String s) throws IllegalArgumentException {
         int len = s.length();
-//        if (len % 2 == 1) {
-//            throw new IllegalArgumentException("Hex string must have even number of characters");
-//        }
+        if (len % 2 == 1) {
+            throw new IllegalArgumentException("Hex string must have even number of characters");
+        }
         byte[] data = new byte[len / 2]; // Allocate 1 byte per 2 hex characters
         for (int i = 0; i < len; i += 2) {
             // Convert each character into a integer (base-16), then bit-shift into place
@@ -51,15 +51,17 @@ public class ByteUtils {
 
     static byte[] rotateOneLeft(byte[] a) {
         final byte[] rotated = new byte[a.length];
-        for (int i = 1; i < a.length; i++) {
-            rotated[i-1] = a[i];
-        }
+        if (a.length - 1 >= 0) System.arraycopy(a, 1, rotated, 0, a.length - 1);
         rotated[rotated.length - 1] = a[0];
         return rotated;
     }
 
-    static byte[] getLast(byte[] a, int howMany) {
-        return Arrays.copyOfRange(a,a.length - howMany, a.length);
+    static byte firstByte(byte[] response) {
+        return response[0];
+    }
+
+    static byte[] last16Bytes(byte[] a) {
+        return Arrays.copyOfRange(a,a.length - 16, a.length);
     }
 
     static byte[] trimOneFront(byte[] bytes) {
