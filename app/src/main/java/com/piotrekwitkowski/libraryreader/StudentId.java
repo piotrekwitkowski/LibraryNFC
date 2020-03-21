@@ -2,6 +2,7 @@ package com.piotrekwitkowski.libraryreader;
 
 import android.util.Log;
 
+import com.piotrekwitkowski.libraryreader.nfc.AESKey;
 import com.piotrekwitkowski.libraryreader.nfc.AID;
 import com.piotrekwitkowski.libraryreader.nfc.ByteUtils;
 import com.piotrekwitkowski.libraryreader.nfc.DESFire;
@@ -63,5 +64,9 @@ class StudentId {
         DESFire.selectApplication(this.isoDep, applicationAid);
     }
 
+    byte[] authenticateAES(AESKey key, byte keyNumber) throws Exception {
+        byte[] aesKey = key.getKey();
+        return DESFire.authenticateAES(this.isoDep, aesKey, keyNumber);
+    }
 
 }

@@ -1,5 +1,7 @@
 package com.piotrekwitkowski.libraryreader.nfc;
 
+import java.util.Arrays;
+
 public class ByteUtils {
 
     static byte[] hexStringToByteArray(String s) throws IllegalArgumentException {
@@ -28,6 +30,10 @@ public class ByteUtils {
         return new String(hexChars);
     }
 
+    static byte[] concatenate(byte a, byte b) {
+        return new byte[] {a, b};
+    }
+
     static byte[] concatenate(byte a, byte[] b) {
         return concatenate(new byte[] { a }, b );
     }
@@ -42,5 +48,19 @@ public class ByteUtils {
         System.arraycopy(b, 0, c, a.length, b.length);
         return c;
     }
+
+    static byte[] rotateOneLeft(byte[] a) {
+        final byte[] rotated = new byte[a.length];
+        for (int i = 1; i < a.length; i++) {
+            rotated[i-1] = a[i];
+        }
+        rotated[rotated.length - 1] = a[0];
+        return rotated;
+    }
+
+    static byte[] getLast(byte[] a, int howMany) {
+        return Arrays.copyOfRange(a,a.length - howMany, a.length);
+    }
+
 
 }
