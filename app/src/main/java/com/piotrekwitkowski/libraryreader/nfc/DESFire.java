@@ -8,6 +8,7 @@ import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.Arrays;
 
 import javax.crypto.BadPaddingException;
@@ -56,6 +57,7 @@ public class DESFire {
 
         // 4. The reader generates its own 16 byte random number (A).
         byte[] A = new byte[AES_KEY_LENGTH];
+        new SecureRandom().nextBytes(A);
 
         // 5. The reader rotates B one byte to the left.
         byte[] rotatedB = ByteUtils.rotateOneLeft(B);
@@ -92,7 +94,7 @@ public class DESFire {
         // 13. The reader checks this matches the original A random number (rotated one byte left).
         // If this fails then the authentication fails. If it matches, the reader knows the card
         // has the AES key too.
-        if (!Arrays.equals(A, E)) {
+        if (!Arrays.equals(ByteUtils.rotateOneLeft(A), E)) {
             throw new DESFireException("authenticateAES failed");
         }
 
