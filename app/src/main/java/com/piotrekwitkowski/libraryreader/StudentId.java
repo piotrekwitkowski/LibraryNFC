@@ -1,13 +1,13 @@
-package com.piotrekwitkowski.lbraryreader;
+package com.piotrekwitkowski.libraryreader;
 
 import android.util.Log;
 
-import com.piotrekwitkowski.lbraryreader.nfc.AID;
-import com.piotrekwitkowski.lbraryreader.nfc.ByteUtils;
-import com.piotrekwitkowski.lbraryreader.nfc.DESFire;
-import com.piotrekwitkowski.lbraryreader.nfc.HCE;
-import com.piotrekwitkowski.lbraryreader.nfc.Iso7816;
-import com.piotrekwitkowski.lbraryreader.nfc.IsoDep;
+import com.piotrekwitkowski.libraryreader.nfc.AID;
+import com.piotrekwitkowski.libraryreader.nfc.ByteUtils;
+import com.piotrekwitkowski.libraryreader.nfc.DESFire;
+import com.piotrekwitkowski.libraryreader.nfc.HCE;
+import com.piotrekwitkowski.libraryreader.nfc.Iso7816;
+import com.piotrekwitkowski.libraryreader.nfc.IsoDep;
 
 import java.io.IOException;
 import java.util.Arrays;

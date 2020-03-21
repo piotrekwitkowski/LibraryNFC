@@ -1,10 +1,10 @@
-package com.piotrekwitkowski.lbraryreader;
+package com.piotrekwitkowski.libraryreader;
 
 import android.nfc.Tag;
 import android.util.Log;
 
-import com.piotrekwitkowski.lbraryreader.nfc.AID;
-import com.piotrekwitkowski.lbraryreader.nfc.IsoDep;
+import com.piotrekwitkowski.libraryreader.nfc.AID;
+import com.piotrekwitkowski.libraryreader.nfc.IsoDep;
 
 class LibraryReader {
     private static final String TAG = "LibraryReader";

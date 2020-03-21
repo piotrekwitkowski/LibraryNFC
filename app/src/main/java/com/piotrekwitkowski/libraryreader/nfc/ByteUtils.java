@@ -1,4 +1,4 @@
-package com.piotrekwitkowski.lbraryreader.nfc;
+package com.piotrekwitkowski.libraryreader.nfc;
 
 public class ByteUtils {
 

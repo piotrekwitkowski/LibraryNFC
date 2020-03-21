@@ -1,4 +1,4 @@
-package com.piotrekwitkowski.lbraryreader;
+package com.piotrekwitkowski.libraryreader;
 
 import android.content.Context;
 
