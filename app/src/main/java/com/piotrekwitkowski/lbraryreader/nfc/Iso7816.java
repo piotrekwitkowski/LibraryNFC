@@ -1,7 +1,5 @@
 package com.piotrekwitkowski.lbraryreader.nfc;
 
-import static com.piotrekwitkowski.lbraryreader.ByteUtils.concatenate;
-
 public class Iso7816 {
     public static final byte[] RESPONSE_SUCCESS = new byte[] {(byte) 0x90, (byte) 0x00};
 
@@ -19,13 +17,13 @@ public class Iso7816 {
         if (command.length == 0) {
             return apduRequiredPart;
         } else {
-            byte[] apduCommandPart = concatenate((byte) command.length, command);
-            byte[] apdu = concatenate(apduRequiredPart, apduCommandPart);
+            byte[] apduCommandPart = ByteUtils.concatenate((byte) command.length, command);
+            byte[] apdu = ByteUtils.concatenate(apduRequiredPart, apduCommandPart);
             return apdu;
         }
     }
 
     static byte[] wrapApdu(byte cla, byte ins, byte p1, byte p2, byte[] command, byte le) {
-        return concatenate(wrapApdu(cla, ins, p1, p2, command), le);
+        return ByteUtils.concatenate(wrapApdu(cla, ins, p1, p2, command), le);
     }
 }

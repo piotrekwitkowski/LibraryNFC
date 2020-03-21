@@ -2,8 +2,6 @@ package com.piotrekwitkowski.lbraryreader.nfc;
 
 import android.util.Log;
 
-import com.piotrekwitkowski.lbraryreader.ByteUtils;
-
 import java.io.IOException;
 
 public class DESFire {

@@ -1,8 +1,8 @@
-package com.piotrekwitkowski.lbraryreader;
+package com.piotrekwitkowski.lbraryreader.nfc;
 
 public class ByteUtils {
 
-    public static byte[] hexStringToByteArray(String s) throws IllegalArgumentException {
+    static byte[] hexStringToByteArray(String s) throws IllegalArgumentException {
         int len = s.length();
 //        if (len % 2 == 1) {
 //            throw new IllegalArgumentException("Hex string must have even number of characters");
@@ -28,15 +28,15 @@ public class ByteUtils {
         return new String(hexChars);
     }
 
-    public static byte[] concatenate(byte a, byte[] b) {
+    static byte[] concatenate(byte a, byte[] b) {
         return concatenate(new byte[] { a }, b );
     }
 
-    public static byte[] concatenate(byte[] a, byte b) {
+    static byte[] concatenate(byte[] a, byte b) {
         return concatenate(a, new byte[] { b });
     }
 
-    public static byte[] concatenate(byte[] a, byte[] b) {
+    static byte[] concatenate(byte[] a, byte[] b) {
         byte[] c = new byte[a.length + b.length];
         System.arraycopy(a, 0, c, 0, a.length);
         System.arraycopy(b, 0, c, a.length, b.length);

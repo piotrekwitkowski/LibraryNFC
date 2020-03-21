@@ -3,6 +3,7 @@ package com.piotrekwitkowski.lbraryreader;
 import android.util.Log;
 
 import com.piotrekwitkowski.lbraryreader.nfc.AID;
+import com.piotrekwitkowski.lbraryreader.nfc.ByteUtils;
 import com.piotrekwitkowski.lbraryreader.nfc.DESFire;
 import com.piotrekwitkowski.lbraryreader.nfc.HCE;
 import com.piotrekwitkowski.lbraryreader.nfc.Iso7816;

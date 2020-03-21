@@ -1,7 +1,5 @@
 package com.piotrekwitkowski.lbraryreader.nfc;
 
-import com.piotrekwitkowski.lbraryreader.ByteUtils;
-
 public final class AID {
     private byte[] aid;
 
