@@ -4,8 +4,8 @@ import com.piotrekwitkowski.log.Log;
 import com.piotrekwitkowski.nfc.AESKey;
 import com.piotrekwitkowski.nfc.AID;
 import com.piotrekwitkowski.nfc.ByteUtils;
-import com.piotrekwitkowski.nfc.DESFire;
-import com.piotrekwitkowski.nfc.DESFireException;
+import com.piotrekwitkowski.nfc.desfire.DESFireReader;
+import com.piotrekwitkowski.nfc.desfire.DESFireException;
 import com.piotrekwitkowski.nfc.HCE;
 import com.piotrekwitkowski.nfc.Iso7816;
 import com.piotrekwitkowski.nfc.IsoDep;
@@ -65,19 +65,19 @@ class StudentId {
 
     void selectApplication(AID aid) throws IOException, DESFireException {
         byte[] applicationAid = aid.getAid();
-        DESFire.selectApplication(this.isoDep, applicationAid);
+        DESFireReader.selectApplication(this.isoDep, applicationAid);
         Log.i(TAG, "Application selected: " + ByteUtils.toHexString(applicationAid));
     }
 
     void authenticateAES(AESKey key, byte keyNumber) throws Exception {
         byte[] aesKey = key.getKey();
-        byte[] sessionKey = DESFire.authenticateAES(this.isoDep, aesKey, keyNumber);
+        byte[] sessionKey = DESFireReader.authenticateAES(this.isoDep, aesKey, keyNumber);
         Log.i(TAG, "Session key: " + ByteUtils.toHexString(sessionKey));
     }
 
 
     byte[] getValue(byte fileNumber, byte[] offset, byte[] length) throws IOException, DESFireException {
-        byte[] value = DESFire.getValue(this.isoDep, fileNumber, offset, length);
+        byte[] value = DESFireReader.getValue(this.isoDep, fileNumber, offset, length);
         Log.i(TAG, "File value: " + ByteUtils.toHexString(value));
         return value;
     }

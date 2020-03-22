@@ -34,7 +34,7 @@ public class ByteUtils {
         return new byte[] {a, b};
     }
 
-    static byte[] concatenate(byte a, byte[] b) {
+    public static byte[] concatenate(byte a, byte[] b) {
         return concatenate(new byte[] { a }, b );
     }
 
@@ -42,21 +42,21 @@ public class ByteUtils {
         return concatenate(a, new byte[] { b });
     }
 
-    static byte[] concatenate(byte[] a, byte[] b) {
+    public static byte[] concatenate(byte[] a, byte[] b) {
         byte[] c = new byte[a.length + b.length];
         System.arraycopy(a, 0, c, 0, a.length);
         System.arraycopy(b, 0, c, a.length, b.length);
         return c;
     }
 
-    static byte[] rotateOneLeft(byte[] a) {
+    public static byte[] rotateOneLeft(byte[] a) {
         final byte[] rotated = new byte[a.length];
         if (a.length - 1 >= 0) System.arraycopy(a, 1, rotated, 0, a.length - 1);
         rotated[rotated.length - 1] = a[0];
         return rotated;
     }
 
-    static byte[] last16Bytes(byte[] a) {
+    public static byte[] last16Bytes(byte[] a) {
         return Arrays.copyOfRange(a,a.length - 16, a.length);
     }
 

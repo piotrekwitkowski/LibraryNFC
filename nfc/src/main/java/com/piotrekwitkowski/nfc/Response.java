@@ -13,11 +13,11 @@ public class Response {
         return bytes;
     }
 
-    byte getStatus() {
+    public byte getStatus() {
         return bytes[0];
     }
 
-    byte[] getData() {
+    public byte[] getData() {
         return Arrays.copyOfRange(bytes, 1, bytes.length);
 
     }

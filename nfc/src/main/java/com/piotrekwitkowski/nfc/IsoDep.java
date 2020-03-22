@@ -23,15 +23,15 @@ public class IsoDep {
         mIsoDep.connect();
     }
 
-    Response transceive(byte command, byte data) throws IOException {
+    public Response transceive(byte command, byte data) throws IOException {
         return transceive(ByteUtils.concatenate(command, data));
     }
 
-    Response transceive(byte command, byte[] data) throws IOException {
+    public Response transceive(byte command, byte[] data) throws IOException {
         return transceive(ByteUtils.concatenate(command, data));
     }
 
-    Response transceive(byte[] data) throws IOException {
+    public Response transceive(byte[] data) throws IOException {
         Log.i(TAG, "--> " + ByteUtils.toHexString(data));
         byte[] response = mIsoDep.transceive(data);
         Log.i(TAG, "<-- " + ByteUtils.toHexString(response));

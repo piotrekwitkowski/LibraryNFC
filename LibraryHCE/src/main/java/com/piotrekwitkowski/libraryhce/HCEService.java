@@ -8,6 +8,8 @@ import android.os.Bundle;
 
 import com.piotrekwitkowski.log.Log;
 import com.piotrekwitkowski.nfc.ByteUtils;
+import com.piotrekwitkowski.nfc.desfire.DESFireEmulation;
+import com.piotrekwitkowski.nfc.desfire.DESFireException;
 
 import static com.piotrekwitkowski.libraryhce.NotificationService.NOTIFICATION_CHANNEL_DESCRIPTION;
 import static com.piotrekwitkowski.libraryhce.NotificationService.NOTIFICATION_CHANNEL_NAME;

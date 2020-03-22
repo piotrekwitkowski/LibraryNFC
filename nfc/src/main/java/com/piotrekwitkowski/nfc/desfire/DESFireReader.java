@@ -1,6 +1,9 @@
-package com.piotrekwitkowski.nfc;
+package com.piotrekwitkowski.nfc.desfire;
 
 import com.piotrekwitkowski.log.Log;
+import com.piotrekwitkowski.nfc.ByteUtils;
+import com.piotrekwitkowski.nfc.IsoDep;
+import com.piotrekwitkowski.nfc.Response;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -18,13 +21,10 @@ import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
-public class DESFire {
-    private static final String TAG = "DESFire";
-    private static final byte SELECT_APPLICATION = (byte) 0x5A;
-    private static final byte AUTHENTICATE_AES = (byte) 0xAA;
-    private static final byte ADDITIONAL_FRAME = (byte) 0xAF;
-    private static final byte GET_VALUE = (byte) 0xBD;
-    private static final byte RESPONSE_SUCCESS = (byte) 0x00;
+import static com.piotrekwitkowski.nfc.desfire.Commands.*;
+
+public class DESFireReader {
+    private static final String TAG = "DESFireReader";
     private static final int AES_KEY_LENGTH = 16;
 
     public static void selectApplication(IsoDep isoDep, byte[] aid) throws IOException, DESFireException {

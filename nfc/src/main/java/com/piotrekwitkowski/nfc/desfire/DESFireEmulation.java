@@ -1,24 +1,27 @@
-package com.piotrekwitkowski.libraryhce;
+package com.piotrekwitkowski.nfc.desfire;
 
 import com.piotrekwitkowski.nfc.ByteUtils;
 import com.piotrekwitkowski.nfc.Response;
 
-class DESFireEmulation {
-    private static final DESFireState STATE = DESFireState.INITIAL;
+enum State {INITIAL, APPLICATION_SELECTED, AUTHENTICATING, APPLICATION_AUTHENTICATED}
 
-    byte[] getResponse(byte[] apdu) throws DESFireException {
+public class DESFireEmulation {
+    private static State STATE = State.INITIAL;
+
+    public byte[] getResponse(byte[] apdu) throws DESFireException {
         Response command = new Response(apdu);
 
-        if (STATE == DESFireState.INITIAL) {
+        if (STATE == State.INITIAL) {
             return onStateInitial(command);
-        } else if (STATE == DESFireState.APPLICATION_SELECTED) {
+        } else if (STATE == State.APPLICATION_SELECTED) {
             return onStateApplicationSelected(command);
-        } else if (STATE == DESFireState.AUTHENTICATING) {
+        } else if (STATE == State.AUTHENTICATING) {
             return onStateAuthenticating(command);
-        } else if (STATE == DESFireState.APPLICATION_AUTHENTICATED) {
+        } else if (STATE == State.APPLICATION_AUTHENTICATED) {
             return onStateApplicationAuthenticated(command);
         } else {
-            throw new DESFireException();
+            STATE = State.INITIAL;
+            throw new DESFireException("DESFire emulation was in an unknown state. Emulation state set to INITIAL.");
         }
     }
 
