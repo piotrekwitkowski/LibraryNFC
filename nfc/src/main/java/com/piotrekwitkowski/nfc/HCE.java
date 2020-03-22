@@ -1,11 +1,11 @@
-package com.piotrekwitkowski.libraryreader.nfc;
+package com.piotrekwitkowski.nfc;
 
-import com.piotrekwitkowski.libraryreader.Log;
+import com.piotrekwitkowski.log.Log;
 
 import java.io.IOException;
 
-import static com.piotrekwitkowski.libraryreader.nfc.Iso7816.SELECT;
-import static com.piotrekwitkowski.libraryreader.nfc.Iso7816.wrapApdu;
+import static com.piotrekwitkowski.nfc.Iso7816.SELECT;
+import static com.piotrekwitkowski.nfc.Iso7816.wrapApdu;
 
 public class HCE {
     private static final String TAG = "HCE";

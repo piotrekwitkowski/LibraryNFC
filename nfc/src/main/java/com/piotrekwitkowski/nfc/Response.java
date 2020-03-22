@@ -1,4 +1,4 @@
-package com.piotrekwitkowski.libraryreader.nfc;
+package com.piotrekwitkowski.nfc;
 
 import java.util.Arrays;
 

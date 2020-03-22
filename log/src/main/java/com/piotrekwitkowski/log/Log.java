@@ -1,4 +1,4 @@
-package com.piotrekwitkowski.libraryreader;
+package com.piotrekwitkowski.log;
 
 import android.annotation.SuppressLint;
 import android.os.Handler;
@@ -9,7 +9,7 @@ public class Log {
     @SuppressLint("StaticFieldLeak")
     private static TextView logTextView;
 
-    static void setLogTextView(TextView tv) {
+    public static void setLogTextView(TextView tv) {
         logTextView = tv;
     }
 
@@ -18,7 +18,7 @@ public class Log {
         new Handler(Looper.getMainLooper()).post(() -> logTextView.setText(logTextView.getText() + format(tag, msg)));
     }
 
-    static void reset(final String tag, final String msg) {
+    public static void reset(final String tag, final String msg) {
         android.util.Log.i(tag, msg);
         new Handler(Looper.getMainLooper()).post(() -> logTextView.setText(format(tag, msg)));
     }

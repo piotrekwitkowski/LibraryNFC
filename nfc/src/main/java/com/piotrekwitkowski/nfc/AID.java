@@ -1,4 +1,4 @@
-package com.piotrekwitkowski.libraryreader.nfc;
+package com.piotrekwitkowski.nfc;
 
 public final class AID {
     private byte[] aid;

@@ -1,6 +1,6 @@
-package com.piotrekwitkowski.libraryreader.nfc;
+package com.piotrekwitkowski.nfc;
 
-import com.piotrekwitkowski.libraryreader.Log;
+import com.piotrekwitkowski.log.Log;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

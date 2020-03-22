@@ -1,4 +1,4 @@
-package com.piotrekwitkowski.libraryreader.nfc;
+package com.piotrekwitkowski.nfc;
 
 public class Iso7816 {
     public static final byte[] RESPONSE_SUCCESS = new byte[] {(byte) 0x90, (byte) 0x00};

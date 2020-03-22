@@ -2,9 +2,10 @@ package com.piotrekwitkowski.libraryreader;
 
 import android.nfc.Tag;
 
-import com.piotrekwitkowski.libraryreader.nfc.AESKey;
-import com.piotrekwitkowski.libraryreader.nfc.AID;
-import com.piotrekwitkowski.libraryreader.nfc.IsoDep;
+import com.piotrekwitkowski.log.Log;
+import com.piotrekwitkowski.nfc.AESKey;
+import com.piotrekwitkowski.nfc.AID;
+import com.piotrekwitkowski.nfc.IsoDep;
 
 import java.util.Arrays;
 

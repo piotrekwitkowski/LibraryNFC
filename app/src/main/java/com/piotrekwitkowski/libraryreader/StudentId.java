@@ -1,14 +1,15 @@
 package com.piotrekwitkowski.libraryreader;
 
-import com.piotrekwitkowski.libraryreader.nfc.AESKey;
-import com.piotrekwitkowski.libraryreader.nfc.AID;
-import com.piotrekwitkowski.libraryreader.nfc.ByteUtils;
-import com.piotrekwitkowski.libraryreader.nfc.DESFire;
-import com.piotrekwitkowski.libraryreader.nfc.DESFireException;
-import com.piotrekwitkowski.libraryreader.nfc.HCE;
-import com.piotrekwitkowski.libraryreader.nfc.Iso7816;
-import com.piotrekwitkowski.libraryreader.nfc.IsoDep;
-import com.piotrekwitkowski.libraryreader.nfc.Response;
+import com.piotrekwitkowski.log.Log;
+import com.piotrekwitkowski.nfc.AESKey;
+import com.piotrekwitkowski.nfc.AID;
+import com.piotrekwitkowski.nfc.ByteUtils;
+import com.piotrekwitkowski.nfc.DESFire;
+import com.piotrekwitkowski.nfc.DESFireException;
+import com.piotrekwitkowski.nfc.HCE;
+import com.piotrekwitkowski.nfc.Iso7816;
+import com.piotrekwitkowski.nfc.IsoDep;
+import com.piotrekwitkowski.nfc.Response;
 
 import java.io.IOException;
 import java.util.Arrays;

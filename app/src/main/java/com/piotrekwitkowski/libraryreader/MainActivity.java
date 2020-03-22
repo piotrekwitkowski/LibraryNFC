@@ -7,6 +7,8 @@ import android.nfc.Tag;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.piotrekwitkowski.log.Log;
+
 public class MainActivity extends AppCompatActivity implements NfcAdapter.ReaderCallback {
     private static final String TAG = "MainActivity";
     private static NfcAdapter nfcAdapter;
