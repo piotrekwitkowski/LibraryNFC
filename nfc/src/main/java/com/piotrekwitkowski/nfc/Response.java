@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class Response {
     byte[] bytes;
 
-    Response(byte[] responseBytes) {
+    public Response(byte[] responseBytes) {
         this.bytes = responseBytes;
     }
 

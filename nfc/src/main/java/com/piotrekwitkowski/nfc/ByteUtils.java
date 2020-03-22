@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class ByteUtils {
 
-    static byte[] toByteArray(String s) throws IllegalArgumentException {
+    public static byte[] toByteArray(String s) throws IllegalArgumentException {
         int len = s.length();
         if (len % 2 == 1) {
             throw new IllegalArgumentException("Hex string must have even number of characters");
