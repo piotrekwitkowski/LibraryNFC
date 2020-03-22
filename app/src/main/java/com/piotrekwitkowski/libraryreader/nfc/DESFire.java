@@ -25,7 +25,6 @@ public class DESFire {
     private static final byte ADDITIONAL_FRAME = (byte) 0xAF;
     private static final byte GET_VALUE = (byte) 0xBD;
     private static final byte RESPONSE_SUCCESS = (byte) 0x00;
-
     private static final int AES_KEY_LENGTH = 16;
 
     public static void selectApplication(IsoDep isoDep, byte[] aid) throws IOException, DESFireException {
@@ -95,7 +94,6 @@ public class DESFire {
         // 13. The reader checks this matches the original A random number (rotated one byte left).
         // If this fails then the authentication fails. If it matches, the reader knows the card
         // has the AES key too.
-
         if (!Arrays.equals(ByteUtils.rotateOneLeft(A), E)) {
             throw new DESFireException("authenticateAES failed");
         }
