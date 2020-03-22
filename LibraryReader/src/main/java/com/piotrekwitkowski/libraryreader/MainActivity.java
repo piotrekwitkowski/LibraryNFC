@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity implements NfcAdapter.Reader
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
-        libraryReader = new LibraryReader();
+        libraryReader = new LibraryReader(this);
         TextView logTextView = findViewById(R.id.logTextView);
         Log.setLogTextView(logTextView);
         Log.reset(TAG, "onCreate()");

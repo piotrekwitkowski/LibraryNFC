@@ -1,5 +1,6 @@
 package com.piotrekwitkowski.libraryreader;
 
+import android.content.Context;
 import android.nfc.Tag;
 
 import com.piotrekwitkowski.log.Log;
@@ -17,12 +18,17 @@ class LibraryReader {
     private static final byte FILE_NUMBER = (byte) 0x00;
     private static final byte[] FILE_OFFSET = new byte[] {(byte) 0x00, (byte) 0x00,(byte) 0x00};
     private static final byte[] FILE_LENGTH = new byte[] {(byte) 0x00, (byte) 0x00,(byte) 0x00};
+    private final Context context;
+
+    LibraryReader(Context ctx) {
+        this.context = ctx;
+    }
 
     void processTag(Tag tag) {
         Log.i(TAG, "processTag()");
         IsoDep isoDep = IsoDep.get(tag);
         try {
-            StudentId studentId = StudentId.getStudentId(isoDep);
+            StudentId studentId = StudentId.getStudentId(this.context, isoDep);
             studentId.selectApplication(AID);
             studentId.authenticateAES(AES_KEY, KEY_NUMBER);
             byte[] libraryFileValue = studentId.getValue(FILE_NUMBER, FILE_OFFSET, FILE_LENGTH);

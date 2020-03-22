@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import com.piotrekwitkowski.log.Log;
 import com.piotrekwitkowski.nfc.ByteUtils;
+import com.piotrekwitkowski.nfc.Iso7816;
 import com.piotrekwitkowski.nfc.desfire.DESFireEmulation;
 import com.piotrekwitkowski.nfc.desfire.DESFireException;
 
@@ -17,23 +18,20 @@ import static com.piotrekwitkowski.libraryhce.NotificationService.NOTIFICATION_C
 public class HCEService extends HostApduService {
     private static final String TAG = "HCEService";
     private final NotificationService notifications = new NotificationService(this);
-    private static final DESFireEmulation DESFire = new DESFireEmulation();
-    private static final byte[] SERVICE_FAILURE_RESPONSE = new byte[] {(byte) 0xEE};
+    private static final DESFireEmulation emulation = new DESFireEmulation();
+    private static boolean firstInteraction = true;
 
     @Override
     public byte[] processCommandApdu(byte[] command, Bundle extras) {
         Log.reset(TAG, "processCommandApdu()");
         createNotificationChannel();
-        notifications.show("<--" + ByteUtils.toHexString(command));
+        notifications.show("<-- " + ByteUtils.toHexString(command));
 
-        try {
-            Log.i(TAG, "<--" + ByteUtils.toHexString(command));
-            byte[] response = DESFire.getResponse(command);
-            Log.i(TAG, "-->" + ByteUtils.toHexString(response));
-            return response;
-        } catch (DESFireException e) {
-            return SERVICE_FAILURE_RESPONSE;
-        }
+        Log.i(TAG, "<-- " + ByteUtils.toHexString(command));
+        byte[] response = firstInteraction ? Iso7816.RESPONSE_SUCCESS : emulation.getResponse(command);
+        firstInteraction = false;
+        Log.i(TAG, "--> " + ByteUtils.toHexString(response));
+        return response;
     }
 
     @Override

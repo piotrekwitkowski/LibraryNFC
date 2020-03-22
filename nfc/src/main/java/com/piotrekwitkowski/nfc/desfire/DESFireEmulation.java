@@ -6,9 +6,10 @@ import com.piotrekwitkowski.nfc.Response;
 enum State {INITIAL, APPLICATION_SELECTED, AUTHENTICATING, APPLICATION_AUTHENTICATED}
 
 public class DESFireEmulation {
+    private static final byte[] EMULATION_FAILURE_RESPONSE = new byte[] {(byte) 0xEE};
     private static State STATE = State.INITIAL;
 
-    public byte[] getResponse(byte[] apdu) throws DESFireException {
+    public byte[] getResponse(byte[] apdu) {
         Response command = new Response(apdu);
 
         if (STATE == State.INITIAL) {
@@ -21,7 +22,9 @@ public class DESFireEmulation {
             return onStateApplicationAuthenticated(command);
         } else {
             STATE = State.INITIAL;
-            throw new DESFireException("DESFire emulation was in an unknown state. Emulation state set to INITIAL.");
+            return EMULATION_FAILURE_RESPONSE;
+//            throw new DESFireException("DESFire emulation was in an unknown state. Emulation state set to INITIAL.");
+
         }
     }
 

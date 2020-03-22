@@ -4,6 +4,8 @@
     <aid-group android:description="@string/hce_service_aid_description"
         android:category="other">
         <aid-filter android:name="@string/hce_aid"/>
+<!--        <aid-filter android:name="A0000002471001"/>-->
+<!--        TODO: remove other AIDs-->
         <aid-filter android:name="D2760000850100"/>
         <aid-filter android:name="F0010203040506"/>
     </aid-group>

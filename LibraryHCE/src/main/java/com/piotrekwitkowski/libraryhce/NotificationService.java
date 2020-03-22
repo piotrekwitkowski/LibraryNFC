@@ -21,8 +21,8 @@ class NotificationService {
         int randomNotificationId = (int) (Math.random()*1000);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, NOTIFICATION_CHANNEL_NAME)
                 .setSmallIcon(R.drawable.ic_stat_name)
-                .setContentTitle("Service")
-                .setContentText("APDU:" + text)
+                .setContentTitle(context.getString(R.string.app_name))
+                .setContentText(text)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
         NotificationManagerCompat.from(context).notify(randomNotificationId, builder.build());
 

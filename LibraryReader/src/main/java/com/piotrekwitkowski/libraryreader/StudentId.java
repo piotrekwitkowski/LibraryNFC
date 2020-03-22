@@ -1,5 +1,7 @@
 package com.piotrekwitkowski.libraryreader;
 
+import android.content.Context;
+
 import com.piotrekwitkowski.log.Log;
 import com.piotrekwitkowski.nfc.AESKey;
 import com.piotrekwitkowski.nfc.AID;
@@ -23,7 +25,7 @@ class StudentId {
         this.isoDep = isoDep;
     }
 
-    static StudentId getStudentId(IsoDep isoDep) throws Exception {
+    static StudentId getStudentId(Context context, IsoDep isoDep) throws Exception {
         Log.i(TAG, "getStudentId()");
         isoDep.connect();
 
@@ -33,7 +35,7 @@ class StudentId {
         if (idForm == StudentId.idForm.PHYSICAL) {
             return new StudentId(isoDep);
         } else if (idForm == StudentId.idForm.HCE) {
-            Response response = HCE.selectAndroidApp(isoDep);
+            Response response = HCE.selectAndroidApp(context, isoDep);
             if (Arrays.equals(response.getBytes(), Iso7816.RESPONSE_SUCCESS)) {
                 return new StudentId(isoDep);
             } else {

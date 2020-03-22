@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Library HCE</string>
-    <string name="hce_aid">A0000002471001</string>
     <string name="hce_service_description">Library HCE Service</string>
     <string name="hce_service_aid_description">Library HCE AID group</string>
 </resources>

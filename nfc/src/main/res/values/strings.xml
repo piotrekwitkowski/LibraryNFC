@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<!--    TODO: change ID to F...-->
+<!--    see: https://stackoverflow.com/questions/27533193/android-hce-are-there-rules-for-aid-->
+    <string name="hce_aid">A0000002471001</string>
+</resources>
