@@ -1,5 +1,6 @@
 package com.piotrekwitkowski.nfc;
 
+import java.security.SecureRandom;
 import java.util.Arrays;
 
 public class ByteUtils {
@@ -60,4 +61,9 @@ public class ByteUtils {
         return Arrays.copyOfRange(a,a.length - 16, a.length);
     }
 
+    public static byte[] getRandomBytes(int length) {
+        byte[] random = new byte[length];
+        new SecureRandom().nextBytes(random);
+        return random;
+    }
 }

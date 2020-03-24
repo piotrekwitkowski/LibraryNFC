@@ -1,4 +1,6 @@
-package com.piotrekwitkowski.nfc;
+package com.piotrekwitkowski.nfc.desfire.keys;
+
+import com.piotrekwitkowski.nfc.ByteUtils;
 
 public class AESKey {
     private byte[] key;

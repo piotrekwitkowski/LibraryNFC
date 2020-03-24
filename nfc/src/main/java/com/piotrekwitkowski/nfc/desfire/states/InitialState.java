@@ -8,20 +8,19 @@ import com.piotrekwitkowski.nfc.desfire.applications.ApplicationNotFoundExceptio
 import com.piotrekwitkowski.nfc.desfire.applications.Applications;
 import com.piotrekwitkowski.nfc.desfire.Command;
 import com.piotrekwitkowski.nfc.desfire.Commands;
-import com.piotrekwitkowski.nfc.desfire.DESFireException;
 import com.piotrekwitkowski.nfc.desfire.ResponseCodes;
 
 public class InitialState extends State {
     private static final String TAG = "InitialState";
     private static Applications applications = new Applications();
 
-    public CommandResult processCommand(Command command) throws DESFireException {
+    public CommandResult processCommand(Command command) {
         Log.i(TAG, "processCommand()");
 
         if (command.getCode() == Commands.SELECT_APPLICATION) {
             return selectApplication(command.getData());
         } else {
-            throw new DESFireException("Command not supported in this state.");
+            return new CommandResult(this, ResponseCodes.ILLEGAL_COMMAND);
         }
     }
 

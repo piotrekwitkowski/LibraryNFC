@@ -3,7 +3,7 @@ package com.piotrekwitkowski.libraryreader;
 import android.content.Context;
 
 import com.piotrekwitkowski.log.Log;
-import com.piotrekwitkowski.nfc.AESKey;
+import com.piotrekwitkowski.nfc.desfire.keys.AESKey;
 import com.piotrekwitkowski.nfc.desfire.aids.AID;
 import com.piotrekwitkowski.nfc.ByteUtils;
 import com.piotrekwitkowski.nfc.desfire.DESFireReader;
@@ -73,7 +73,6 @@ class StudentId {
 
     void authenticateAES(AESKey key, byte keyNumber) throws Exception {
         byte[] aesKey = key.getKey();
-
         byte[] sessionKey = DESFireReader.authenticateAES(this.isoDep, aesKey, keyNumber);
         Log.i(TAG, "Session key: " + ByteUtils.toHexString(sessionKey));
     }

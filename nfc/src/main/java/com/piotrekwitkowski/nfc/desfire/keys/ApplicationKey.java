@@ -1,7 +1,5 @@
 package com.piotrekwitkowski.nfc.desfire.keys;
 
-import com.piotrekwitkowski.nfc.AESKey;
-
 public abstract class ApplicationKey {
     byte keyNumber;
     AESKey key;
