@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.piotrekwitkowski.log.Log;
 import com.piotrekwitkowski.nfc.AESKey;
-import com.piotrekwitkowski.nfc.AID;
+import com.piotrekwitkowski.nfc.desfire.aids.AID;
 import com.piotrekwitkowski.nfc.ByteUtils;
 import com.piotrekwitkowski.nfc.desfire.DESFireReader;
 import com.piotrekwitkowski.nfc.desfire.DESFireException;
@@ -66,13 +66,14 @@ class StudentId {
     }
 
     void selectApplication(AID aid) throws IOException, DESFireException {
-        byte[] applicationAid = aid.getAid();
+        byte[] applicationAid = aid.getBytes();
         DESFireReader.selectApplication(this.isoDep, applicationAid);
         Log.i(TAG, "Application selected: " + ByteUtils.toHexString(applicationAid));
     }
 
     void authenticateAES(AESKey key, byte keyNumber) throws Exception {
         byte[] aesKey = key.getKey();
+
         byte[] sessionKey = DESFireReader.authenticateAES(this.isoDep, aesKey, keyNumber);
         Log.i(TAG, "Session key: " + ByteUtils.toHexString(sessionKey));
     }

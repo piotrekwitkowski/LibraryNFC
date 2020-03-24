@@ -10,7 +10,6 @@ import com.piotrekwitkowski.log.Log;
 import com.piotrekwitkowski.nfc.ByteUtils;
 import com.piotrekwitkowski.nfc.Iso7816;
 import com.piotrekwitkowski.nfc.desfire.DESFireEmulation;
-import com.piotrekwitkowski.nfc.desfire.DESFireException;
 
 import static com.piotrekwitkowski.libraryhce.NotificationService.NOTIFICATION_CHANNEL_DESCRIPTION;
 import static com.piotrekwitkowski.libraryhce.NotificationService.NOTIFICATION_CHANNEL_NAME;
@@ -28,6 +27,8 @@ public class HCEService extends HostApduService {
         notifications.show("<-- " + ByteUtils.toHexString(command));
 
         Log.i(TAG, "<-- " + ByteUtils.toHexString(command));
+        Log.i(TAG, "firstInteraction?" + firstInteraction);
+
         byte[] response = firstInteraction ? Iso7816.RESPONSE_SUCCESS : emulation.getResponse(command);
         firstInteraction = false;
         Log.i(TAG, "--> " + ByteUtils.toHexString(response));

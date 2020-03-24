@@ -21,8 +21,6 @@ import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
-import static com.piotrekwitkowski.nfc.desfire.Commands.*;
-
 public class DESFireReader {
     private static final String TAG = "DESFireReader";
     private static final int AES_KEY_LENGTH = 16;
@@ -30,9 +28,9 @@ public class DESFireReader {
     public static void selectApplication(IsoDep isoDep, byte[] aid) throws IOException, DESFireException {
         Log.i(TAG, "selectApplication()");
 
-        Response response = isoDep.transceive(SELECT_APPLICATION, aid);
-        if (response.getStatus() != RESPONSE_SUCCESS) {
-            throw new DESFireException("selectApplication() failed. Response status: " + response.getStatus());
+        Response response = isoDep.transceive(Commands.SELECT_APPLICATION, aid);
+        if (response.getResponseCode() != ResponseCodes.SUCCESS) {
+            throw new DESFireException("selectApplication() failed. Response status: " + response.getResponseCode());
         }
     }
 
@@ -42,7 +40,7 @@ public class DESFireReader {
         // 1. The reader asked for AES authentication for a specific key.
         // 2. The card creates a 16 byte random number (B) and encrypts it with the selected AES
         // key. The result is sent to the reader.
-        Response response = isoDep.transceive(AUTHENTICATE_AES, keyNumber);
+        Response response = isoDep.transceive(Commands.AUTHENTICATE_AES, keyNumber);
         byte[] challenge = response.getData();
         Log.i(TAG, "challenge: " + ByteUtils.toHexString(challenge));
 
@@ -70,7 +68,7 @@ public class DESFireReader {
         ivParam = new IvParameterSpec(challenge);
         cipher.init(Cipher.ENCRYPT_MODE, aes, ivParam);
         byte[] D = cipher.doFinal(C);
-        byte[] command = ByteUtils.concatenate(ADDITIONAL_FRAME, D);
+        byte[] command = ByteUtils.concatenate(Commands.ADDITIONAL_FRAME, D);
         response = isoDep.transceive(command);
         challenge = response.getData();
 
@@ -78,7 +76,7 @@ public class DESFireReader {
         // 9. The card checks the second 16 bytes match the original random number B (rotated one
         // byte left). If this fails the authentication has failed. If it matches, the card knows
         // the reader has the right key.
-        if (response.getStatus() != RESPONSE_SUCCESS) {
+        if (response.getResponseCode() != ResponseCodes.SUCCESS) {
             throw new DESFireException("authenticateAES failed");
         }
 
@@ -114,11 +112,11 @@ public class DESFireReader {
 
         byte[] data = ByteUtils.concatenate(fileNumber, offset);
         data = ByteUtils.concatenate(data, length);
-        Response response = isoDep.transceive(GET_VALUE, data);
-        if (response.getStatus() == RESPONSE_SUCCESS) {
+        Response response = isoDep.transceive(Commands.GET_VALUE, data);
+        if (response.getResponseCode() == ResponseCodes.SUCCESS) {
             return response.getData();
         } else {
-            throw new DESFireException("getValue failed. Response status: " + response.getStatus());
+            throw new DESFireException("getValue failed. Response status: " + response.getResponseCode());
         }
     }
 

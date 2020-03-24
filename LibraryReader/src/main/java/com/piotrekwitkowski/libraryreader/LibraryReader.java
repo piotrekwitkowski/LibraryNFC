@@ -5,16 +5,19 @@ import android.nfc.Tag;
 
 import com.piotrekwitkowski.log.Log;
 import com.piotrekwitkowski.nfc.AESKey;
-import com.piotrekwitkowski.nfc.AID;
+import com.piotrekwitkowski.nfc.desfire.aids.AID;
 import com.piotrekwitkowski.nfc.IsoDep;
+import com.piotrekwitkowski.nfc.desfire.aids.LibraryAID;
+import com.piotrekwitkowski.nfc.desfire.keys.ApplicationKey;
+import com.piotrekwitkowski.nfc.desfire.keys.LibraryKey0;
 
 import java.util.Arrays;
 
 class LibraryReader {
     private static final String TAG = "LibraryReader";
-    private static final AID AID = new AID("015548");
-    private static final AESKey AES_KEY = new AESKey("00000000000000000000000000000000");
-    private static final byte KEY_NUMBER = (byte) 0x00;
+//    private static final AID AID = new AID("015548");
+    private static final AID LIBRARY_AID = new LibraryAID();
+    private static final ApplicationKey LIBRARY_KEY = new LibraryKey0();
     private static final byte FILE_NUMBER = (byte) 0x00;
     private static final byte[] FILE_OFFSET = new byte[] {(byte) 0x00, (byte) 0x00,(byte) 0x00};
     private static final byte[] FILE_LENGTH = new byte[] {(byte) 0x00, (byte) 0x00,(byte) 0x00};
@@ -29,8 +32,8 @@ class LibraryReader {
         IsoDep isoDep = IsoDep.get(tag);
         try {
             StudentId studentId = StudentId.getStudentId(this.context, isoDep);
-            studentId.selectApplication(AID);
-            studentId.authenticateAES(AES_KEY, KEY_NUMBER);
+            studentId.selectApplication(LIBRARY_AID);
+            studentId.authenticateAES(LIBRARY_KEY.getKey(), LIBRARY_KEY.getKeyNumber());
             byte[] libraryFileValue = studentId.getValue(FILE_NUMBER, FILE_OFFSET, FILE_LENGTH);
             byte[] libraryId = Arrays.copyOfRange(libraryFileValue, 10, 22);
             Log.i(TAG, "libraryId: " + new String(libraryId));

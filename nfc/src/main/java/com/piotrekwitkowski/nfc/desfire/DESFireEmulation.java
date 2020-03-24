@@ -1,47 +1,28 @@
 package com.piotrekwitkowski.nfc.desfire;
 
-import com.piotrekwitkowski.nfc.ByteUtils;
-import com.piotrekwitkowski.nfc.Response;
-
-enum State {INITIAL, APPLICATION_SELECTED, AUTHENTICATING, APPLICATION_AUTHENTICATED}
+import com.piotrekwitkowski.log.Log;
+import com.piotrekwitkowski.nfc.desfire.states.CommandResult;
+import com.piotrekwitkowski.nfc.desfire.states.State;
+import com.piotrekwitkowski.nfc.desfire.states.InitialState;
 
 public class DESFireEmulation {
+    private static final String TAG = "DESFireEmulation";
     private static final byte[] EMULATION_FAILURE_RESPONSE = new byte[] {(byte) 0xEE};
-    private static State STATE = State.INITIAL;
+    private static State state = new InitialState();
 
     public byte[] getResponse(byte[] apdu) {
-        Response command = new Response(apdu);
+        Log.i(TAG, "getResponse()");
 
-        if (STATE == State.INITIAL) {
-            return onStateInitial(command);
-        } else if (STATE == State.APPLICATION_SELECTED) {
-            return onStateApplicationSelected(command);
-        } else if (STATE == State.AUTHENTICATING) {
-            return onStateAuthenticating(command);
-        } else if (STATE == State.APPLICATION_AUTHENTICATED) {
-            return onStateApplicationAuthenticated(command);
-        } else {
-            STATE = State.INITIAL;
+        Command command = new Command(apdu);
+        try {
+            CommandResult result = state.processCommand(command);
+            state = result.getState();
+            return result.getResponse().getBytes();
+        } catch (Exception e) {
+//            TODO: think about changing to DESFireException
+            e.printStackTrace();
             return EMULATION_FAILURE_RESPONSE;
-//            throw new DESFireException("DESFire emulation was in an unknown state. Emulation state set to INITIAL.");
-
         }
-    }
-
-    private byte[] onStateInitial(Response command) {
-        return ByteUtils.toByteArray("9000");
-    }
-
-    private byte[] onStateApplicationSelected(Response command) {
-        return new byte[0];
-    }
-
-    private byte[] onStateAuthenticating(Response command) {
-        return new byte[0];
-    }
-
-    private byte[] onStateApplicationAuthenticated(Response command) {
-        return new byte[0];
     }
 
 }
