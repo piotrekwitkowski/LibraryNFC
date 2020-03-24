@@ -17,13 +17,13 @@ import static com.piotrekwitkowski.libraryhce.NotificationService.NOTIFICATION_C
 
 public class HCEService extends HostApduService {
     private static final String TAG = "HCEService";
-    private final NotificationService notifications = new NotificationService(this);
     private static final DESFireEmulation emulation = new DESFireEmulation();
     private static boolean firstInteraction = true;
+    private final NotificationService notifications = new NotificationService(this);
 
     @Override
     public byte[] processCommandApdu(byte[] command, Bundle extras) {
-        Log.reset(TAG, "processCommandApdu()");
+        Log.i(TAG, "processCommandApdu()");
         createNotificationChannel();
         notifications.show("<-- " + ByteUtils.toHexString(command));
 
@@ -37,6 +37,7 @@ public class HCEService extends HostApduService {
     @Override
     public void onDeactivated(int reason) {
         Log.i(TAG, "onDeactivated(). Reason: " + reason);
+        firstInteraction = true;
     }
 
     private void createNotificationChannel() {
