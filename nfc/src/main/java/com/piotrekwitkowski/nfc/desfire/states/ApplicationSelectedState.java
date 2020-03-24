@@ -20,7 +20,7 @@ public class ApplicationSelectedState extends State {
 
         if (command.getCode() == Commands.AUTHENTICATE_AES) {
             if (command.getData().length == 1) {
-                return application.authenticateAES(command.getData()[0]);
+                return application.initiateAESAuthentication(command.getData()[0]);
             } else {
                 return new CommandResult(this, ResponseCodes.LENGTH_ERROR);
             }

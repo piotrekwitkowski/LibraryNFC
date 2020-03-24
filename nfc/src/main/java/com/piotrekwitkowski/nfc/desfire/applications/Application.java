@@ -37,7 +37,9 @@ public abstract class Application {
         return aid;
     }
 
-    public CommandResult authenticateAES(byte keyNumber) {
+    public CommandResult initiateAESAuthentication(byte keyNumber) {
+        Log.i(TAG, "initiateAESAuthentication()");
+
         // TODO: support many keys and different permissions
         if (keyNumber == applicationKey.getKeyNumber()) {
             try {
@@ -52,7 +54,7 @@ public abstract class Application {
     }
 
     private CommandResult authenticateAESWithKey(AESKey key) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
-        Log.i(TAG, "authenticateAES()");
+        Log.i(TAG, "authenticateAESWithKey()");
 
         // 1. The reader asked for AES authentication for a specific key.
         // 2. The card creates a 16 byte random number (B) and encrypts it with the selected AES
