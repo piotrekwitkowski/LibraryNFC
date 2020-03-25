@@ -2,9 +2,6 @@ package com.piotrekwitkowski.nfc.desfire.applications;
 
 import com.piotrekwitkowski.log.Log;
 import com.piotrekwitkowski.nfc.ByteUtils;
-import com.piotrekwitkowski.nfc.Response;
-import com.piotrekwitkowski.nfc.desfire.Commands;
-import com.piotrekwitkowski.nfc.desfire.DESFireException;
 import com.piotrekwitkowski.nfc.desfire.ResponseCodes;
 import com.piotrekwitkowski.nfc.desfire.aids.AID;
 import com.piotrekwitkowski.nfc.desfire.keys.AESKey;
@@ -13,14 +10,10 @@ import com.piotrekwitkowski.nfc.desfire.states.AuthenticationInProgressState;
 import com.piotrekwitkowski.nfc.desfire.states.CommandResult;
 import com.piotrekwitkowski.nfc.desfire.states.State;
 
-
-import java.io.ByteArrayOutputStream;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import java.util.Arrays;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -31,7 +24,7 @@ import javax.crypto.spec.SecretKeySpec;
 
 public abstract class Application {
     private static final String TAG = "Application";
-    protected static AID aid;
+    AID aid;
     ApplicationKey applicationKey;
 
     AID getAid() {

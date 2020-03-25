@@ -28,7 +28,7 @@ public class HCEService extends HostApduService {
             notifications.show("<--" + ByteUtils.toHexString(command));
             firstInteraction = false;
             emulation = new DESFireEmulation();
-            return Iso7816.RESPONSE_SUCCESS;
+            return Iso7816.ISO7816_RESPONSE_SUCCESS;
         } else {
             Log.i(TAG, "<-- " + ByteUtils.toHexString(command));
             notifications.show("<--" + ByteUtils.toHexString(command));

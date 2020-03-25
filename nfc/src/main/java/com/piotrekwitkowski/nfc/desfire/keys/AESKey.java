@@ -4,7 +4,7 @@ import com.piotrekwitkowski.nfc.ByteUtils;
 
 public class AESKey {
     public static final int AES_KEY_LENGTH = 16;
-    private byte[] key;
+    private final byte[] key;
 
     AESKey(String key) {
         this.key = ByteUtils.toByteArray(key);

@@ -3,19 +3,20 @@ package com.piotrekwitkowski.libraryreader;
 import android.content.Context;
 
 import com.piotrekwitkowski.log.Log;
-import com.piotrekwitkowski.nfc.desfire.keys.AESKey;
-import com.piotrekwitkowski.nfc.desfire.aids.AID;
 import com.piotrekwitkowski.nfc.ByteUtils;
-import com.piotrekwitkowski.nfc.desfire.DESFireReader;
-import com.piotrekwitkowski.nfc.desfire.DESFireException;
 import com.piotrekwitkowski.nfc.HCE;
 import com.piotrekwitkowski.nfc.Iso7816;
 import com.piotrekwitkowski.nfc.IsoDep;
 import com.piotrekwitkowski.nfc.Response;
+import com.piotrekwitkowski.nfc.desfire.DESFireException;
+import com.piotrekwitkowski.nfc.desfire.DESFireReader;
+import com.piotrekwitkowski.nfc.desfire.aids.AID;
+import com.piotrekwitkowski.nfc.desfire.keys.AESKey;
 
 import java.io.IOException;
 import java.util.Arrays;
 
+@SuppressWarnings("SameParameterValue")
 class StudentId {
     private static final String TAG = "StudentId";
     private final IsoDep isoDep;
@@ -36,7 +37,7 @@ class StudentId {
             return new StudentId(isoDep);
         } else if (idForm == StudentId.idForm.HCE) {
             Response response = HCE.selectAndroidApp(context, isoDep);
-            if (Arrays.equals(response.getBytes(), Iso7816.RESPONSE_SUCCESS)) {
+            if (Arrays.equals(response.getBytes(), Iso7816.ISO7816_RESPONSE_SUCCESS)) {
                 return new StudentId(isoDep);
             } else {
                 throw new StudentIdException("HCE Mobile Application select was unsuccessful");

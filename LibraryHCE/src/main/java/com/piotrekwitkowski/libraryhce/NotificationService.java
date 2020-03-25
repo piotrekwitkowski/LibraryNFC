@@ -36,7 +36,9 @@ class NotificationService {
             nc.setDescription(NOTIFICATION_CHANNEL_DESCRIPTION);
 
             NotificationManager nm = ctx.getSystemService(NotificationManager.class);
-            nm.createNotificationChannel(nc);
+            if (nm != null) {
+                nm.createNotificationChannel(nc);
+            }
         }
     }
 }

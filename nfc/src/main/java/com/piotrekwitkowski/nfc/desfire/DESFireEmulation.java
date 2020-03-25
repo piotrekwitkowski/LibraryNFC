@@ -14,7 +14,7 @@ public class DESFireEmulation {
 
         CommandResult result = state.processCommand(new Command(apdu));
         state = result.getState();
-        return result.getResponse().getBytes();
+        return result.getResponse();
     }
 
 }

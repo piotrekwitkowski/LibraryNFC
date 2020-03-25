@@ -5,7 +5,7 @@ import com.piotrekwitkowski.nfc.desfire.keys.LibraryKey0;
 
 class LibraryApplication extends Application {
     LibraryApplication() {
-        this.aid = new LibraryAID();
+        aid = new LibraryAID();
         this.applicationKey = new LibraryKey0();
     }
 }

@@ -3,14 +3,10 @@ package com.piotrekwitkowski.nfc.desfire;
 import java.util.Arrays;
 
 public class Command {
-    private byte[] bytes;
+    private final byte[] bytes;
 
     Command(byte[] bytes) {
         this.bytes = bytes;
-    }
-
-    byte[] getBytes() {
-        return bytes;
     }
 
     public byte getCode() {

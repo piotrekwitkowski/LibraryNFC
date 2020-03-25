@@ -1,11 +1,11 @@
 package com.piotrekwitkowski.libraryreader;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
 import android.os.Bundle;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.piotrekwitkowski.log.Log;
 

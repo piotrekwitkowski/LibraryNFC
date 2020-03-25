@@ -39,10 +39,6 @@ public class ByteUtils {
         return concatenate(new byte[] { a }, b );
     }
 
-    static byte[] concatenate(byte[] a, byte b) {
-        return concatenate(a, new byte[] { b });
-    }
-
     public static byte[] concatenate(byte[] a, byte[] b) {
         byte[] c = new byte[a.length + b.length];
         System.arraycopy(a, 0, c, 0, a.length);

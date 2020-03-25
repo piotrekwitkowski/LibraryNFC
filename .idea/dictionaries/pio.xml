@@ -2,6 +2,12 @@
   <dictionary name="pio">
     <words>
       <w>apdu</w>
+      <w>cardemulation</w>
+      <w>hceservice</w>
+      <w>lbraryreader</w>
+      <w>libraryhce</w>
+      <w>libraryreader</w>
+      <w>piotrekwitkowski</w>
       <w>transceive</w>
     </words>
   </dictionary>

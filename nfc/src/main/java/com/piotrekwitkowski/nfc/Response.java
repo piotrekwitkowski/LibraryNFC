@@ -3,14 +3,10 @@ package com.piotrekwitkowski.nfc;
 import java.util.Arrays;
 
 public class Response {
-    private byte[] bytes;
+    private final byte[] bytes;
 
-    public Response(byte[] responseBytes) {
+    Response(byte[] responseBytes) {
         this.bytes = responseBytes;
-    }
-
-    public Response(byte responseCode) {
-        this.bytes = new byte[] {responseCode};
     }
 
     public byte[] getBytes() {
