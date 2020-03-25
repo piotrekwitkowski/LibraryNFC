@@ -54,7 +54,6 @@ public class DESFireReader {
 
         // 4. The reader generates its own 16 byte random number (A).
         byte[] A = ByteUtils.getRandomBytes(AESKey.AES_KEY_LENGTH);
-        Log.i(TAG, "A: " + ByteUtils.toHexString(A));
 
         // 5. The reader rotates B one byte to the left.
         byte[] rotatedB = ByteUtils.rotateOneLeft(B);
