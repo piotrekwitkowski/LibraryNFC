@@ -1,7 +1,9 @@
 package com.piotrekwitkowski.nfc.desfire.states;
 
 import com.piotrekwitkowski.log.Log;
+import com.piotrekwitkowski.nfc.ByteUtils;
 import com.piotrekwitkowski.nfc.desfire.Command;
+import com.piotrekwitkowski.nfc.desfire.Commands;
 import com.piotrekwitkowski.nfc.desfire.ResponseCodes;
 import com.piotrekwitkowski.nfc.desfire.applications.Application;
 
@@ -17,7 +19,16 @@ class ApplicationAuthenticatedState extends State {
 
     public CommandResult processCommand(Command command) {
         Log.i(TAG, "processCommand()");
-        return new CommandResult(this, ResponseCodes.ILLEGAL_COMMAND);
+
+        if (command.getCode() == Commands.GET_VALUE) {
+            return getValue(command.getData());
+        } else {
+            return new CommandResult(this, ResponseCodes.ILLEGAL_COMMAND);
+        }
+    }
+
+    private CommandResult getValue(byte[] commandData) {
+        return new CommandResult(this, ByteUtils.toByteArray("000035383536383600000048554853303538353638363000000000000000000000B6BB1FF53D881894"));
     }
 }
 
