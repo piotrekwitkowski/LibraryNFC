@@ -11,6 +11,7 @@ import com.piotrekwitkowski.nfc.desfire.keys.AESKey;
 import com.piotrekwitkowski.nfc.desfire.keys.ApplicationKey;
 import com.piotrekwitkowski.nfc.desfire.states.AuthenticationInProgressState;
 import com.piotrekwitkowski.nfc.desfire.states.CommandResult;
+import com.piotrekwitkowski.nfc.desfire.states.State;
 
 
 import java.io.ByteArrayOutputStream;
@@ -37,13 +38,13 @@ public abstract class Application {
         return aid;
     }
 
-    public CommandResult initiateAESAuthentication(byte keyNumber) {
+    public CommandResult initiateAESAuthentication(State state, byte keyNumber) {
         Log.i(TAG, "initiateAESAuthentication()");
 
         // TODO: support many keys and different permissions
         if (keyNumber == applicationKey.getKeyNumber()) {
             try {
-                return authenticateAESWithKey(applicationKey.getKey());
+                return authenticateAESWithKey(state, applicationKey.getKey());
             } catch (Exception e) {
                 e.printStackTrace();
                 return new CommandResult(null, ResponseCodes.AUTHENTICATION_ERROR);
@@ -53,7 +54,7 @@ public abstract class Application {
         }
     }
 
-    private CommandResult authenticateAESWithKey(AESKey key) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
+    private CommandResult authenticateAESWithKey(State state, AESKey key) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
         Log.i(TAG, "authenticateAESWithKey()");
 
         // 1. The reader asked for AES authentication for a specific key.
@@ -69,7 +70,7 @@ public abstract class Application {
         Log.i(TAG, "cipheredData: " + ByteUtils.toHexString(challenge));
 
         byte[] response = ByteUtils.concatenate(ResponseCodes.ADDITIONAL_FRAME, challenge);
-        return new CommandResult(new AuthenticationInProgressState(this, B, challenge), response);
+        return new CommandResult(new AuthenticationInProgressState(state, this, key, B, challenge), response);
 
 
         // 3. The reader receives the 16 bytes, and decrypts it using the AES key to get back the

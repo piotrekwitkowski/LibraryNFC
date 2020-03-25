@@ -57,6 +57,10 @@ public class ByteUtils {
         return rotated;
     }
 
+    public static byte[] first16Bytes(byte[] a) {
+        return Arrays.copyOfRange(a,0, 16);
+    }
+
     public static byte[] last16Bytes(byte[] a) {
         return Arrays.copyOfRange(a,a.length - 16, a.length);
     }
@@ -66,4 +70,6 @@ public class ByteUtils {
         new SecureRandom().nextBytes(random);
         return random;
     }
+
+
 }

@@ -4,6 +4,7 @@ import com.piotrekwitkowski.log.Log;
 import com.piotrekwitkowski.nfc.ByteUtils;
 import com.piotrekwitkowski.nfc.IsoDep;
 import com.piotrekwitkowski.nfc.Response;
+import com.piotrekwitkowski.nfc.desfire.keys.AESKey;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -23,7 +24,6 @@ import javax.crypto.spec.SecretKeySpec;
 
 public class DESFireReader {
     private static final String TAG = "DESFireReader";
-    private static final int AES_KEY_LENGTH = 16;
 
     public static void selectApplication(IsoDep isoDep, byte[] aid) throws IOException, DESFireException {
         Log.i(TAG, "selectApplication()");
@@ -48,14 +48,14 @@ public class DESFireReader {
         // original 16 byte random number (B). This is decrypted with an IV of all 00 bytes.
         Cipher cipher = Cipher.getInstance("AES/CBC/NoPadding");
         Key aes = new SecretKeySpec(aesKey, "AES");
-        IvParameterSpec ivParam = new IvParameterSpec(new byte[AES_KEY_LENGTH]);
+        IvParameterSpec ivParam = new IvParameterSpec(new byte[AESKey.AES_KEY_LENGTH]);
         cipher.init(Cipher.DECRYPT_MODE, aes, ivParam);
         byte[] B = cipher.doFinal(challenge);
         Log.i(TAG, "cipheredData: " + ByteUtils.toHexString(B));
 
         // 4. The reader generates its own 16 byte random number (A).
-        byte[] A = new byte[AES_KEY_LENGTH];
-        new SecureRandom().nextBytes(A);
+        byte[] A = ByteUtils.getRandomBytes(AESKey.AES_KEY_LENGTH);
+        Log.i(TAG, "A: " + ByteUtils.toHexString(A));
 
         // 5. The reader rotates B one byte to the left.
         byte[] rotatedB = ByteUtils.rotateOneLeft(B);
