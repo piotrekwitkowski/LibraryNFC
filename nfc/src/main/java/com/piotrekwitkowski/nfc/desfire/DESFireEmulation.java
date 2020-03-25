@@ -7,7 +7,7 @@ import com.piotrekwitkowski.nfc.desfire.states.InitialState;
 
 public class DESFireEmulation {
     private static final String TAG = "DESFireEmulation";
-    private static State state = new InitialState();
+    private State state = new InitialState();
 
     public byte[] getResponse(byte[] apdu) {
         Log.i(TAG, "getResponse()");

@@ -1,9 +1,6 @@
 package com.piotrekwitkowski.libraryhce;
 
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.nfc.cardemulation.HostApduService;
-import android.os.Build;
 import android.os.Bundle;
 
 import com.piotrekwitkowski.log.Log;
@@ -11,47 +8,38 @@ import com.piotrekwitkowski.nfc.ByteUtils;
 import com.piotrekwitkowski.nfc.Iso7816;
 import com.piotrekwitkowski.nfc.desfire.DESFireEmulation;
 
-import static com.piotrekwitkowski.libraryhce.NotificationService.NOTIFICATION_CHANNEL_DESCRIPTION;
-import static com.piotrekwitkowski.libraryhce.NotificationService.NOTIFICATION_CHANNEL_NAME;
-
 public class HCEService extends HostApduService {
     private static final String TAG = "HCEService";
-    private static final DESFireEmulation emulation = new DESFireEmulation();
+    private static DESFireEmulation emulation;
     private static boolean firstInteraction = true;
     private final NotificationService notifications = new NotificationService(this);
 
     @Override
     public byte[] processCommandApdu(byte[] command, Bundle extras) {
-        Log.i(TAG, "processCommandApdu()");
-        createNotificationChannel();
-        notifications.show("<-- " + ByteUtils.toHexString(command));
-
-        Log.i(TAG, "<-- " + ByteUtils.toHexString(command));
-        Log.i(TAG, "firstInteraction?" + firstInteraction);
-
-        byte[] response = firstInteraction ? Iso7816.RESPONSE_SUCCESS : emulation.getResponse(command);
-        firstInteraction = false;
+        byte[] response = getResponse(command);
         Log.i(TAG, "--> " + ByteUtils.toHexString(response));
         return response;
+    }
+
+    private byte[] getResponse(byte[] command) {
+        if (firstInteraction) {
+            Log.reset(TAG, "<-- " + ByteUtils.toHexString(command));
+            notifications.createNotificationChannel(this);
+            notifications.show("<--" + ByteUtils.toHexString(command));
+            firstInteraction = false;
+            emulation = new DESFireEmulation();
+            return Iso7816.RESPONSE_SUCCESS;
+        } else {
+            Log.i(TAG, "<-- " + ByteUtils.toHexString(command));
+            notifications.show("<--" + ByteUtils.toHexString(command));
+            return emulation.getResponse(command);
+        }
     }
 
     @Override
     public void onDeactivated(int reason) {
         Log.i(TAG, "onDeactivated(). Reason: " + reason);
         firstInteraction = true;
-    }
-
-    private void createNotificationChannel() {
-        // Create the NotificationChannel, but only on API 26+ because
-        // the NotificationChannel class is new and not in the support library
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            String name = this.getString(R.string.app_name);
-            NotificationChannel nc = new NotificationChannel(NOTIFICATION_CHANNEL_NAME, name, NotificationManager.IMPORTANCE_DEFAULT);
-            nc.setDescription(NOTIFICATION_CHANNEL_DESCRIPTION);
-
-            NotificationManager nm = this.getSystemService(NotificationManager.class);
-            nm.createNotificationChannel(nc);
-        }
     }
 
 }
