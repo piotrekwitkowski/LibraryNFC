@@ -1,13 +1,18 @@
 package com.piotrekwitkowski.nfc.desfire;
 
 import com.piotrekwitkowski.log.Log;
+import com.piotrekwitkowski.nfc.desfire.aids.AIDWrongLengthException;
 import com.piotrekwitkowski.nfc.desfire.states.CommandResult;
 import com.piotrekwitkowski.nfc.desfire.states.State;
 import com.piotrekwitkowski.nfc.desfire.states.InitialState;
 
 public class DESFireEmulation {
     private static final String TAG = "DESFireEmulation";
-    private State state = new InitialState();
+    private State state;
+
+    public DESFireEmulation() throws AIDWrongLengthException {
+        this.state = new InitialState();
+    }
 
     public byte[] getResponse(byte[] apdu) {
         Log.i(TAG, "getResponse()");

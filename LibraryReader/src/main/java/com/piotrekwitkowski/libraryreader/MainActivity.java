@@ -8,18 +8,18 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.piotrekwitkowski.log.Log;
+import com.piotrekwitkowski.nfc.desfire.aids.AIDWrongLengthException;
 
 public class MainActivity extends AppCompatActivity implements NfcAdapter.ReaderCallback {
     private static final String TAG = "MainActivity";
-    private static NfcAdapter nfcAdapter;
-    private static LibraryReader libraryReader;
+    private final LibraryReader libraryReader = new LibraryReader(this);
+    private NfcAdapter nfcAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
-        libraryReader = new LibraryReader(this);
         TextView logTextView = findViewById(R.id.logTextView);
         Log.setLogTextView(logTextView);
         Log.reset(TAG, "onCreate()");
@@ -44,6 +44,10 @@ public class MainActivity extends AppCompatActivity implements NfcAdapter.Reader
     @Override
     public void onTagDiscovered(Tag tag) {
         Log.reset(TAG, "onTagDiscovered()");
-        libraryReader.processTag(tag);
+        try {
+            libraryReader.processTag(tag);
+        } catch (AIDWrongLengthException e) {
+            Log.i(TAG, e.getMessage());
+        }
     }
 }

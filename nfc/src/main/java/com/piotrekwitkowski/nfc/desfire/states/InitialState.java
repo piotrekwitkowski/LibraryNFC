@@ -11,10 +11,14 @@ import com.piotrekwitkowski.nfc.desfire.applications.LibraryApplication;
 
 public class InitialState extends State {
     private static final String TAG = "InitialState";
-    private static final Application[] applications = new Application[] {
-            new LibraryApplication(),
-            // here other applications
-    };
+    private final Application[] applications;
+
+    public InitialState() throws AIDWrongLengthException {
+        this.applications = new Application[] {
+                new LibraryApplication(),
+                // here other applications
+        };
+    }
 
     public CommandResult processCommand(Command command) {
         Log.i(TAG, "processCommand()");

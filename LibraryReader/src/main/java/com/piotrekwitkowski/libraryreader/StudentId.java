@@ -35,7 +35,7 @@ class StudentId {
             return new StudentId(isoDep);
         } else if (idForm == StudentId.idForm.HCE) {
             Response response = HCE.selectAndroidApp(context, isoDep);
-            if (Arrays.equals(response.getBytes(), Iso7816.ISO7816_RESPONSE_SUCCESS)) {
+            if (Arrays.equals(response.getBytes(), Iso7816.RESPONSE_SUCCESS)) {
                 return new StudentId(isoDep);
             } else {
                 throw new StudentIdException("HCE Mobile Application select was unsuccessful");

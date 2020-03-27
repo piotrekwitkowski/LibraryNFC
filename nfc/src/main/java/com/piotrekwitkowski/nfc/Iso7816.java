@@ -1,7 +1,8 @@
 package com.piotrekwitkowski.nfc;
 
 public class Iso7816 {
-    public static final byte[] ISO7816_RESPONSE_SUCCESS = new byte[] {(byte) 0x90, (byte) 0x00};
+    public static final byte[] RESPONSE_SUCCESS = new byte[] {(byte) 0x90, (byte) 0x00};
+    public static final byte[] RESPONSE_INTERNAL_ERROR = new byte[] {(byte) 0x90, (byte) 0x00};
     private static final byte ISO7816_SELECT_COMMAND = (byte) 0xA4;
 //    private final static byte READ_BINARY = (byte) 0xB0;
 //    private final static byte UPDATE_BINARY = (byte) 0xD6;
