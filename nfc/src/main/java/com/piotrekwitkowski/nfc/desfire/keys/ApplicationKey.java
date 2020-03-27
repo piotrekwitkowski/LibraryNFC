@@ -4,8 +4,13 @@ public class ApplicationKey {
     private final AESKey aesKey;
     private final byte keyNumber;
 
-    ApplicationKey(AESKey aesKey, int keyNumber) {
+    public ApplicationKey(AESKey aesKey, int keyNumber) {
         this.aesKey = aesKey;
+        this.keyNumber = (byte) keyNumber;
+    }
+
+    public ApplicationKey(String aesKey, int keyNumber) {
+        this.aesKey = new AESKey(aesKey);
         this.keyNumber = (byte) keyNumber;
     }
 

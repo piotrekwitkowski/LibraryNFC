@@ -7,7 +7,7 @@ import java.util.Arrays;
 public class AID {
     private final byte[] bytes;
 
-    AID(String aid) {
+    public AID(String aid) {
         this.bytes = ByteUtils.toByteArray(aid);
     }
 
