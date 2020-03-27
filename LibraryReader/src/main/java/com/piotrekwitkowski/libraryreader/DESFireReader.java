@@ -47,13 +47,13 @@ class DESFireReader {
         // original 16 byte random number (B). This is decrypted with an IV of all 00 bytes.
         Cipher cipher = Cipher.getInstance("AES/CBC/NoPadding");
         Key aes = new SecretKeySpec(aesKey, "AES");
-        IvParameterSpec ivParam = new IvParameterSpec(new byte[AESKey.AES_KEY_LENGTH]);
+        IvParameterSpec ivParam = new IvParameterSpec(new byte[16]);
         cipher.init(Cipher.DECRYPT_MODE, aes, ivParam);
         byte[] B = cipher.doFinal(challenge);
         Log.i(TAG, "cipheredData: " + ByteUtils.toHexString(B));
 
         // 4. The reader generates its own 16 byte random number (A).
-        byte[] A = ByteUtils.getRandomBytes(AESKey.AES_KEY_LENGTH);
+        byte[] A = ByteUtils.getRandomBytes(16);
 
         // 5. The reader rotates B one byte to the left.
         byte[] rotatedB = ByteUtils.rotateOneLeft(B);
