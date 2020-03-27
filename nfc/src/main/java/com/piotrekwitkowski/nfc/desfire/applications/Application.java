@@ -5,7 +5,6 @@ import com.piotrekwitkowski.nfc.ByteUtils;
 import com.piotrekwitkowski.nfc.desfire.ResponseCodes;
 import com.piotrekwitkowski.nfc.desfire.aids.AID;
 import com.piotrekwitkowski.nfc.desfire.keys.AESKey;
-import com.piotrekwitkowski.nfc.desfire.keys.ApplicationKey;
 import com.piotrekwitkowski.nfc.desfire.states.AuthenticationInProgressState;
 import com.piotrekwitkowski.nfc.desfire.states.CommandResult;
 import com.piotrekwitkowski.nfc.desfire.states.State;
@@ -24,8 +23,13 @@ import javax.crypto.spec.SecretKeySpec;
 
 public abstract class Application {
     private static final String TAG = "Application";
-    AID aid;
-    ApplicationKey applicationKey;
+    private final AID aid;
+    private final AESKey AESKey0;
+
+    Application(AID aid, AESKey aesKey0) {
+        this.aid = aid;
+        AESKey0 = aesKey0;
+    }
 
     AID getAid() {
         return aid;
@@ -35,9 +39,9 @@ public abstract class Application {
         Log.i(TAG, "initiateAESAuthentication()");
 
         // TODO: support many keys and different permissions
-        if (keyNumber == applicationKey.getKeyNumber()) {
+        if (keyNumber == 0) {
             try {
-                return authenticateAESWithKey(state, applicationKey.getKey());
+                return authenticateAESWithKey(state, AESKey0);
             } catch (Exception e) {
                 e.printStackTrace();
                 return new CommandResult(null, ResponseCodes.AUTHENTICATION_ERROR);

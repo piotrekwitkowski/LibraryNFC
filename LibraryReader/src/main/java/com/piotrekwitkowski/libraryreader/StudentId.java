@@ -11,7 +11,7 @@ import com.piotrekwitkowski.nfc.Response;
 import com.piotrekwitkowski.nfc.desfire.DESFireException;
 import com.piotrekwitkowski.nfc.desfire.DESFireReader;
 import com.piotrekwitkowski.nfc.desfire.aids.AID;
-import com.piotrekwitkowski.nfc.desfire.keys.AESKey;
+import com.piotrekwitkowski.nfc.desfire.keys.ApplicationKey;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -72,8 +72,9 @@ class StudentId {
         Log.i(TAG, "Application selected: " + ByteUtils.toHexString(applicationAid));
     }
 
-    void authenticateAES(AESKey key, byte keyNumber) throws Exception {
-        byte[] aesKey = key.getKey();
+    void authenticateAES(ApplicationKey applicationKey) throws Exception {
+        byte[] aesKey = applicationKey.getAESKey().getKey();
+        byte keyNumber = applicationKey.getKeyNumber();
         byte[] sessionKey = DESFireReader.authenticateAES(this.isoDep, aesKey, keyNumber);
         Log.i(TAG, "Session key: " + ByteUtils.toHexString(sessionKey));
     }
