@@ -8,8 +8,6 @@ import com.piotrekwitkowski.nfc.HCE;
 import com.piotrekwitkowski.nfc.Iso7816;
 import com.piotrekwitkowski.nfc.IsoDep;
 import com.piotrekwitkowski.nfc.Response;
-import com.piotrekwitkowski.nfc.desfire.DESFireException;
-import com.piotrekwitkowski.nfc.desfire.DESFireReader;
 import com.piotrekwitkowski.nfc.desfire.aids.AID;
 import com.piotrekwitkowski.nfc.desfire.keys.ApplicationKey;
 
@@ -66,7 +64,7 @@ class StudentId {
         }
     }
 
-    void selectApplication(AID aid) throws IOException, DESFireException {
+    void selectApplication(AID aid) throws IOException, DESFireReaderException {
         byte[] applicationAid = aid.getBytes();
         DESFireReader.selectApplication(this.isoDep, applicationAid);
         Log.i(TAG, "Application selected: " + ByteUtils.toHexString(applicationAid));
@@ -79,7 +77,7 @@ class StudentId {
         Log.i(TAG, "Session key: " + ByteUtils.toHexString(sessionKey));
     }
 
-    byte[] readData(int fileNumber, int offset, int length) throws IOException, DESFireException {
+    byte[] readData(int fileNumber, int offset, int length) throws IOException, DESFireReaderException {
         byte[] response = DESFireReader.readData(this.isoDep, fileNumber, offset, length);
         // TODO: check CRC (last 8 bytes)
         byte[] data = ByteUtils.trimEnd(response, 8);

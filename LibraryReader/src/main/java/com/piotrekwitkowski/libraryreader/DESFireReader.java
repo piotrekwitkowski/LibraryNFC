@@ -1,9 +1,11 @@
-package com.piotrekwitkowski.nfc.desfire;
+package com.piotrekwitkowski.libraryreader;
 
 import com.piotrekwitkowski.log.Log;
 import com.piotrekwitkowski.nfc.ByteUtils;
 import com.piotrekwitkowski.nfc.IsoDep;
 import com.piotrekwitkowski.nfc.Response;
+import com.piotrekwitkowski.nfc.desfire.Commands;
+import com.piotrekwitkowski.nfc.desfire.ResponseCodes;
 import com.piotrekwitkowski.nfc.desfire.keys.AESKey;
 
 import java.io.ByteArrayOutputStream;
@@ -21,19 +23,19 @@ import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
-public class DESFireReader {
+class DESFireReader {
     private static final String TAG = "DESFireReader";
 
-    public static void selectApplication(IsoDep isoDep, byte[] aid) throws IOException, DESFireException {
+    static void selectApplication(IsoDep isoDep, byte[] aid) throws IOException, DESFireReaderException {
         Log.i(TAG, "selectApplication()");
 
         Response response = isoDep.transceive(Commands.SELECT_APPLICATION, aid);
         if (response.getResponseCode() != ResponseCodes.SUCCESS) {
-            throw new DESFireException("selectApplication() failed. Response status: " + response.getResponseCode());
+            throw new DESFireReaderException("selectApplication() failed. Response status: " + response.getResponseCode());
         }
     }
 
-    public static byte[] authenticateAES(IsoDep isoDep, byte[] aesKey, byte keyNumber) throws IOException, NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException, DESFireException {
+    static byte[] authenticateAES(IsoDep isoDep, byte[] aesKey, byte keyNumber) throws IOException, NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException, DESFireReaderException {
         Log.i(TAG, "authenticateAES()");
 
         // 1. The reader asked for AES authentication for a specific key.
@@ -75,7 +77,7 @@ public class DESFireReader {
         // byte left). If this fails the authentication has failed. If it matches, the card knows
         // the reader has the right key.
         if (response.getResponseCode() != ResponseCodes.SUCCESS) {
-            throw new DESFireException("authenticateAES failed");
+            throw new DESFireReaderException("authenticateAES failed");
         }
 
         // 10. The card rotates the first 16 bytes (A) left by one byte.
@@ -91,7 +93,7 @@ public class DESFireReader {
         // If this fails then the authentication fails. If it matches, the reader knows the card
         // has the AES key too.
         if (!Arrays.equals(ByteUtils.rotateOneLeft(A), E)) {
-            throw new DESFireException("authenticateAES failed");
+            throw new DESFireReaderException("authenticateAES failed");
         }
 
         // 14. Finally both reader and card generate a 16 byte session key using the random numbers
@@ -105,7 +107,7 @@ public class DESFireReader {
         return sessionKeyOutputStream.toByteArray();
     }
 
-    public static byte[] readData(IsoDep isoDep, int fileNumber, int offset, int length) throws IOException, DESFireException {
+    static byte[] readData(IsoDep isoDep, int fileNumber, int offset, int length) throws IOException, DESFireReaderException {
         Log.i(TAG, "readData()");
 
         // TODO: check if file
@@ -120,7 +122,7 @@ public class DESFireReader {
         if (response.getResponseCode() == ResponseCodes.SUCCESS) {
             return response.getData();
         } else {
-            throw new DESFireException("readData failed. Response status: " + response.getResponseCode());
+            throw new DESFireReaderException("readData failed. Response status: " + response.getResponseCode());
         }
     }
 
