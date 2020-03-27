@@ -8,7 +8,7 @@ import com.piotrekwitkowski.nfc.ByteUtils;
 import com.piotrekwitkowski.nfc.Iso7816;
 import com.piotrekwitkowski.nfc.desfire.DESFireEmulation;
 import com.piotrekwitkowski.nfc.desfire.aids.AIDWrongLengthException;
-import com.piotrekwitkowski.nfc.desfire.applications.LibraryApplication;
+import com.piotrekwitkowski.libraryhce.application.LibraryApplication;
 
 public class HCEService extends HostApduService {
     private static final String TAG = "HCEService";

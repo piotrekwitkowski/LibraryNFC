@@ -1,8 +1,7 @@
-package com.piotrekwitkowski.nfc.desfire.applications;
+package com.piotrekwitkowski.libraryhce.application;
 
 import com.piotrekwitkowski.nfc.desfire.aids.AIDWrongLengthException;
-import com.piotrekwitkowski.nfc.desfire.aids.LibraryAID;
-import com.piotrekwitkowski.nfc.desfire.keys.LibraryAESKey0;
+import com.piotrekwitkowski.nfc.desfire.applications.Application;
 
 public class LibraryApplication extends Application {
     public LibraryApplication() throws AIDWrongLengthException {
