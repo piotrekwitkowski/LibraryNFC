@@ -1,7 +1,7 @@
 package com.piotrekwitkowski.libraryhce.application;
 
 import com.piotrekwitkowski.nfc.desfire.InvalidParameterException;
-import com.piotrekwitkowski.nfc.desfire.keys.AESKey;
+import com.piotrekwitkowski.nfc.desfire.AESKey;
 
 class LibraryAESKey0 extends AESKey {
     LibraryAESKey0() throws InvalidParameterException {

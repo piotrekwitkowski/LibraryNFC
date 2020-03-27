@@ -4,8 +4,8 @@ import com.piotrekwitkowski.log.Log;
 import com.piotrekwitkowski.nfc.ByteUtils;
 import com.piotrekwitkowski.nfc.desfire.Command;
 import com.piotrekwitkowski.nfc.desfire.ResponseCodes;
-import com.piotrekwitkowski.nfc.desfire.applications.Application;
-import com.piotrekwitkowski.nfc.desfire.keys.AESKey;
+import com.piotrekwitkowski.nfc.desfire.Application;
+import com.piotrekwitkowski.nfc.desfire.AESKey;
 
 import java.io.ByteArrayOutputStream;
 import java.security.Key;

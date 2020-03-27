@@ -1,7 +1,6 @@
-package com.piotrekwitkowski.nfc.desfire.keys;
+package com.piotrekwitkowski.nfc.desfire;
 
 import com.piotrekwitkowski.nfc.ByteUtils;
-import com.piotrekwitkowski.nfc.desfire.InvalidParameterException;
 
 public class AESKey {
     private final byte[] key;

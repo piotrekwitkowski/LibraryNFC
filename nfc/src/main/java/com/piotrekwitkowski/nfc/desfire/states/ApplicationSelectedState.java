@@ -3,7 +3,7 @@ package com.piotrekwitkowski.nfc.desfire.states;
 import com.piotrekwitkowski.log.Log;
 import com.piotrekwitkowski.nfc.desfire.Commands;
 import com.piotrekwitkowski.nfc.desfire.ResponseCodes;
-import com.piotrekwitkowski.nfc.desfire.applications.Application;
+import com.piotrekwitkowski.nfc.desfire.Application;
 import com.piotrekwitkowski.nfc.desfire.Command;
 
 public class ApplicationSelectedState extends State {

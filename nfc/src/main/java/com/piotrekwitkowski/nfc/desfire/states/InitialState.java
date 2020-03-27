@@ -4,9 +4,9 @@ import com.piotrekwitkowski.log.Log;
 import com.piotrekwitkowski.nfc.desfire.Command;
 import com.piotrekwitkowski.nfc.desfire.Commands;
 import com.piotrekwitkowski.nfc.desfire.ResponseCodes;
-import com.piotrekwitkowski.nfc.desfire.aids.AID;
+import com.piotrekwitkowski.nfc.desfire.AID;
 import com.piotrekwitkowski.nfc.desfire.InvalidParameterException;
-import com.piotrekwitkowski.nfc.desfire.applications.Application;
+import com.piotrekwitkowski.nfc.desfire.Application;
 
 public class InitialState extends State {
     private static final String TAG = "InitialState";

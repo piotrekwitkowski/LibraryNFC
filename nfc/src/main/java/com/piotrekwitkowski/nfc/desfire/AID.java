@@ -1,7 +1,6 @@
-package com.piotrekwitkowski.nfc.desfire.aids;
+package com.piotrekwitkowski.nfc.desfire;
 
 import com.piotrekwitkowski.nfc.ByteUtils;
-import com.piotrekwitkowski.nfc.desfire.InvalidParameterException;
 
 import java.util.Arrays;
 

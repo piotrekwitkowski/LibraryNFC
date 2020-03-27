@@ -5,7 +5,7 @@ import com.piotrekwitkowski.nfc.ByteUtils;
 import com.piotrekwitkowski.nfc.desfire.Command;
 import com.piotrekwitkowski.nfc.desfire.Commands;
 import com.piotrekwitkowski.nfc.desfire.ResponseCodes;
-import com.piotrekwitkowski.nfc.desfire.applications.Application;
+import com.piotrekwitkowski.nfc.desfire.Application;
 
 @SuppressWarnings("FieldCanBeLocal")
 class ApplicationAuthenticatedState extends State {

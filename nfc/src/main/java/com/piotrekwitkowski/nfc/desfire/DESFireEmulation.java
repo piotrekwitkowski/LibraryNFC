@@ -1,7 +1,6 @@
 package com.piotrekwitkowski.nfc.desfire;
 
 import com.piotrekwitkowski.log.Log;
-import com.piotrekwitkowski.nfc.desfire.applications.Application;
 import com.piotrekwitkowski.nfc.desfire.states.CommandResult;
 import com.piotrekwitkowski.nfc.desfire.states.State;
 import com.piotrekwitkowski.nfc.desfire.states.InitialState;

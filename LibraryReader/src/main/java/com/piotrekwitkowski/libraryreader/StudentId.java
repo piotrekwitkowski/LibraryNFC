@@ -5,8 +5,8 @@ import android.content.Context;
 import com.piotrekwitkowski.log.Log;
 import com.piotrekwitkowski.nfc.ByteUtils;
 import com.piotrekwitkowski.nfc.Iso7816;
-import com.piotrekwitkowski.nfc.desfire.aids.AID;
-import com.piotrekwitkowski.nfc.desfire.keys.AESKey;
+import com.piotrekwitkowski.nfc.desfire.AID;
+import com.piotrekwitkowski.nfc.desfire.AESKey;
 
 import java.io.IOException;
 import java.util.Arrays;

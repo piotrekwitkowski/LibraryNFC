@@ -1,10 +1,7 @@
-package com.piotrekwitkowski.nfc.desfire.applications;
+package com.piotrekwitkowski.nfc.desfire;
 
 import com.piotrekwitkowski.log.Log;
 import com.piotrekwitkowski.nfc.ByteUtils;
-import com.piotrekwitkowski.nfc.desfire.ResponseCodes;
-import com.piotrekwitkowski.nfc.desfire.aids.AID;
-import com.piotrekwitkowski.nfc.desfire.keys.AESKey;
 import com.piotrekwitkowski.nfc.desfire.states.AuthenticationInProgressState;
 import com.piotrekwitkowski.nfc.desfire.states.CommandResult;
 import com.piotrekwitkowski.nfc.desfire.states.State;
