@@ -1,18 +1,14 @@
 package com.piotrekwitkowski.nfc.desfire.aids;
 
+import com.piotrekwitkowski.nfc.ByteUtils;
+
 import java.util.Arrays;
 
 public class AID {
-    byte[] bytes;
+    private final byte[] bytes;
 
-    AID() {}
-
-    public AID(byte[] aid) throws AIDWrongLengthException {
-        if (aid.length == 3) {
-            this.bytes = aid;
-        } else {
-            throw new AIDWrongLengthException();
-        }
+    AID(String aid) {
+        this.bytes = ByteUtils.toByteArray(aid);
     }
 
     public boolean equals(AID aid) {
