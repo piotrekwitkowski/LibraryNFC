@@ -7,17 +7,13 @@ import com.piotrekwitkowski.nfc.desfire.ResponseCodes;
 import com.piotrekwitkowski.nfc.desfire.aids.AID;
 import com.piotrekwitkowski.nfc.desfire.aids.AIDWrongLengthException;
 import com.piotrekwitkowski.nfc.desfire.applications.Application;
-import com.piotrekwitkowski.nfc.desfire.applications.LibraryApplication;
 
 public class InitialState extends State {
     private static final String TAG = "InitialState";
     private final Application[] applications;
 
-    public InitialState() throws AIDWrongLengthException {
-        this.applications = new Application[] {
-                new LibraryApplication(),
-                // here other applications
-        };
+    public InitialState(Application[] applications) {
+        this.applications = applications;
     }
 
     public CommandResult processCommand(Command command) {

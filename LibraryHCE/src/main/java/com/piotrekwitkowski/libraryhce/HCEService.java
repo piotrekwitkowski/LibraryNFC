@@ -8,11 +8,12 @@ import com.piotrekwitkowski.nfc.ByteUtils;
 import com.piotrekwitkowski.nfc.Iso7816;
 import com.piotrekwitkowski.nfc.desfire.DESFireEmulation;
 import com.piotrekwitkowski.nfc.desfire.aids.AIDWrongLengthException;
+import com.piotrekwitkowski.nfc.desfire.applications.LibraryApplication;
 
 public class HCEService extends HostApduService {
     private static final String TAG = "HCEService";
-    private static DESFireEmulation emulation;
     private static boolean firstInteraction = true;
+    private static DESFireEmulation emulation;
     private final NotificationService notifications = new NotificationService(this);
 
     @Override
@@ -28,12 +29,17 @@ public class HCEService extends HostApduService {
         notifications.show("<--" + ByteUtils.toHexString(command));
 
         try {
-            emulation = new DESFireEmulation();
+            emulation = getEmulation();
             firstInteraction = false;
             return Iso7816.RESPONSE_SUCCESS;
         } catch (AIDWrongLengthException e) {
             return Iso7816.RESPONSE_INTERNAL_ERROR;
         }
+    }
+
+    private DESFireEmulation getEmulation() throws AIDWrongLengthException {
+        LibraryApplication libraryApplication = new LibraryApplication();
+        return new DESFireEmulation(libraryApplication);
     }
 
     private byte[] getNextResponse(byte[] command) {
