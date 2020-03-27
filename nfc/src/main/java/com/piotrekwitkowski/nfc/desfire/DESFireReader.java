@@ -105,16 +105,16 @@ public class DESFireReader {
         return sessionKeyOutputStream.toByteArray();
     }
 
-    public static byte[] getValue(IsoDep isoDep, byte fileNumber, byte[] offset, byte[] length) throws IOException, DESFireException {
-        Log.i(TAG, "getValue()");
+    public static byte[] readData(IsoDep isoDep, byte fileNumber, byte[] offset, byte[] length) throws IOException, DESFireException {
+        Log.i(TAG, "readData()");
 
         byte[] data = ByteUtils.concatenate(fileNumber, offset);
         data = ByteUtils.concatenate(data, length);
-        Response response = isoDep.transceive(Commands.GET_VALUE, data);
+        Response response = isoDep.transceive(Commands.READ_DATA, data);
         if (response.getResponseCode() == ResponseCodes.SUCCESS) {
             return response.getData();
         } else {
-            throw new DESFireException("getValue failed. Response status: " + response.getResponseCode());
+            throw new DESFireException("readData failed. Response status: " + response.getResponseCode());
         }
     }
 

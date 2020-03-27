@@ -78,9 +78,8 @@ class StudentId {
         Log.i(TAG, "Session key: " + ByteUtils.toHexString(sessionKey));
     }
 
-
-    byte[] getValue(byte fileNumber, byte[] offset, byte[] length) throws IOException, DESFireException {
-        byte[] value = DESFireReader.getValue(this.isoDep, fileNumber, offset, length);
+    byte[] readData(byte fileNumber, byte[] offset, byte[] length) throws IOException, DESFireException {
+        byte[] value = DESFireReader.readData(this.isoDep, fileNumber, offset, length);
         Log.i(TAG, "File value: " + ByteUtils.toHexString(value));
         return value;
     }

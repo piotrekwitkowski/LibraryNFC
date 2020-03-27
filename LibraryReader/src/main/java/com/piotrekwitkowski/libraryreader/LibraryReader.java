@@ -33,7 +33,7 @@ class LibraryReader {
             StudentId studentId = StudentId.getStudentId(this.context, isoDep);
             studentId.selectApplication(LIBRARY_AID);
             studentId.authenticateAES(LIBRARY_KEY.getKey(), LIBRARY_KEY.getKeyNumber());
-            byte[] libraryFileValue = studentId.getValue(FILE_NUMBER, FILE_OFFSET, FILE_LENGTH);
+            byte[] libraryFileValue = studentId.readData(FILE_NUMBER, FILE_OFFSET, FILE_LENGTH);
             byte[] libraryId = Arrays.copyOfRange(libraryFileValue, 10, 22);
             Log.i(TAG, "libraryId: " + new String(libraryId));
 

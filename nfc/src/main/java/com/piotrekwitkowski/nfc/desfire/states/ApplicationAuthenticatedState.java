@@ -21,7 +21,7 @@ class ApplicationAuthenticatedState extends State {
     public CommandResult processCommand(Command command) {
         Log.i(TAG, "processCommand()");
 
-        if (command.getCode() == Commands.GET_VALUE) {
+        if (command.getCode() == Commands.READ_DATA) {
             return getValue(command.getData());
         } else {
             return new CommandResult(this, ResponseCodes.ILLEGAL_COMMAND);
