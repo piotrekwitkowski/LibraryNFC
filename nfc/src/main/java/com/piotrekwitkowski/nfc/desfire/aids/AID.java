@@ -1,25 +1,26 @@
 package com.piotrekwitkowski.nfc.desfire.aids;
 
 import com.piotrekwitkowski.nfc.ByteUtils;
+import com.piotrekwitkowski.nfc.desfire.InvalidParameterException;
 
 import java.util.Arrays;
 
 public class AID {
     private final byte[] bytes;
 
-    public AID(String aid) throws AIDWrongLengthException {
+    public AID(String aid) throws InvalidParameterException {
         if (aid.length() == 6) {
             this.bytes = ByteUtils.toByteArray(aid);
         } else {
-            throw new AIDWrongLengthException();
+            throw new InvalidParameterException("AID length should be 6 chars");
         }
     }
 
-    public AID(byte[] aid) throws AIDWrongLengthException {
+    public AID(byte[] aid) throws InvalidParameterException {
         if (aid.length == 3) {
             this.bytes = aid;
         } else {
-            throw new AIDWrongLengthException();
+            throw new InvalidParameterException("AID length should be 3 bytes");
         }
     }
 

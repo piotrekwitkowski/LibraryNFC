@@ -5,7 +5,7 @@ import android.nfc.Tag;
 
 import com.piotrekwitkowski.log.Log;
 import com.piotrekwitkowski.nfc.desfire.aids.AID;
-import com.piotrekwitkowski.nfc.desfire.aids.AIDWrongLengthException;
+import com.piotrekwitkowski.nfc.desfire.InvalidParameterException;
 import com.piotrekwitkowski.nfc.desfire.keys.AESKey;
 
 class LibraryReader {
@@ -16,7 +16,7 @@ class LibraryReader {
         this.context = ctx;
     }
 
-    void processTag(Tag tag) throws AIDWrongLengthException {
+    void processTag(Tag tag) throws InvalidParameterException {
         Log.i(TAG, "processTag()");
 
         final AID LIBRARY_AID = new AID("015548");

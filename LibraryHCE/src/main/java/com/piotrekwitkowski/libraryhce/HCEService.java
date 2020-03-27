@@ -7,7 +7,7 @@ import com.piotrekwitkowski.log.Log;
 import com.piotrekwitkowski.nfc.ByteUtils;
 import com.piotrekwitkowski.nfc.Iso7816;
 import com.piotrekwitkowski.nfc.desfire.DESFireEmulation;
-import com.piotrekwitkowski.nfc.desfire.aids.AIDWrongLengthException;
+import com.piotrekwitkowski.nfc.desfire.InvalidParameterException;
 import com.piotrekwitkowski.libraryhce.application.LibraryApplication;
 
 public class HCEService extends HostApduService {
@@ -32,12 +32,12 @@ public class HCEService extends HostApduService {
             emulation = getEmulation();
             firstInteraction = false;
             return Iso7816.RESPONSE_SUCCESS;
-        } catch (AIDWrongLengthException e) {
+        } catch (InvalidParameterException e) {
             return Iso7816.RESPONSE_INTERNAL_ERROR;
         }
     }
 
-    private DESFireEmulation getEmulation() throws AIDWrongLengthException {
+    private DESFireEmulation getEmulation() throws InvalidParameterException {
         LibraryApplication libraryApplication = new LibraryApplication();
         return new DESFireEmulation(libraryApplication);
     }

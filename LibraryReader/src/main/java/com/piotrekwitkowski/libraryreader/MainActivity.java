@@ -8,7 +8,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.piotrekwitkowski.log.Log;
-import com.piotrekwitkowski.nfc.desfire.aids.AIDWrongLengthException;
+import com.piotrekwitkowski.nfc.desfire.InvalidParameterException;
 
 public class MainActivity extends AppCompatActivity implements NfcAdapter.ReaderCallback {
     private static final String TAG = "MainActivity";
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements NfcAdapter.Reader
         Log.reset(TAG, "onTagDiscovered()");
         try {
             libraryReader.processTag(tag);
-        } catch (AIDWrongLengthException e) {
+        } catch (InvalidParameterException e) {
             Log.i(TAG, e.getMessage());
         }
     }
