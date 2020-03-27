@@ -19,13 +19,17 @@ public class ApplicationSelectedState extends State {
         Log.i(TAG, "current application: " + application.getClass().getSimpleName());
 
         if (command.getCode() == Commands.AUTHENTICATE_AES) {
-            if (command.getData().length == 1) {
-                return application.initiateAESAuthentication(this, command.getData()[0]);
-            } else {
-                return new CommandResult(this, ResponseCodes.LENGTH_ERROR);
-            }
+            return authenticateAES(command.getData());
         } else {
             return new CommandResult(this, ResponseCodes.ILLEGAL_COMMAND);
+        }
+    }
+
+    private CommandResult authenticateAES(byte[] commandData) {
+        if (commandData.length == 1) {
+            return application.initiateAESAuthentication(this, commandData[0]);
+        } else {
+            return new CommandResult(this, ResponseCodes.LENGTH_ERROR);
         }
     }
 
