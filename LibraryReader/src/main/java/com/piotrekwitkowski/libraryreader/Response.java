@@ -1,23 +1,23 @@
-package com.piotrekwitkowski.nfc;
+package com.piotrekwitkowski.libraryreader;
 
 import java.util.Arrays;
 
-public class Response {
+class Response {
     private final byte[] bytes;
 
     Response(byte[] responseBytes) {
         this.bytes = responseBytes;
     }
 
-    public byte[] getBytes() {
+    byte[] getBytes() {
         return bytes;
     }
 
-    public byte getResponseCode() {
+    byte getResponseCode() {
         return bytes[0];
     }
 
-    public byte[] getData() {
+    byte[] getData() {
         return Arrays.copyOfRange(bytes, 1, bytes.length);
     }
 }

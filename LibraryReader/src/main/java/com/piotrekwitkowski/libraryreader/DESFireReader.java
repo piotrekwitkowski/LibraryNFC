@@ -2,8 +2,6 @@ package com.piotrekwitkowski.libraryreader;
 
 import com.piotrekwitkowski.log.Log;
 import com.piotrekwitkowski.nfc.ByteUtils;
-import com.piotrekwitkowski.nfc.IsoDep;
-import com.piotrekwitkowski.nfc.Response;
 import com.piotrekwitkowski.nfc.desfire.Commands;
 import com.piotrekwitkowski.nfc.desfire.ResponseCodes;
 import com.piotrekwitkowski.nfc.desfire.keys.AESKey;

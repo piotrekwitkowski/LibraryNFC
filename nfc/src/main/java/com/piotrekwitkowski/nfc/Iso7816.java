@@ -12,7 +12,7 @@ public class Iso7816 {
 //    private final static byte INTERNAL_AUTHENTICATE = (byte) 0x88;
 //    private final static byte EXTERNAL_AUTHENTICATE = (byte) 0x82;
 
-    static byte[] wrapApdu(byte[] command) {
+    public static byte[] wrapApdu(byte[] command) {
         byte[] apduRequiredPart = new byte[] {(byte) 0x00, SELECT, (byte) 0x04, (byte) 0x00};
         if (command.length == 0) {
             return apduRequiredPart;

@@ -31,7 +31,7 @@ public class ByteUtils {
         return new String(hexChars);
     }
 
-    static byte[] concatenate(byte a, byte b) {
+    public static byte[] concatenate(byte a, byte b) {
         return new byte[] {a, b};
     }
 

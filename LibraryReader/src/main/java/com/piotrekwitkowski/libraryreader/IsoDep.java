@@ -1,8 +1,9 @@
-package com.piotrekwitkowski.nfc;
+package com.piotrekwitkowski.libraryreader;
 
 import android.nfc.Tag;
 
 import com.piotrekwitkowski.log.Log;
+import com.piotrekwitkowski.nfc.ByteUtils;
 
 import java.io.IOException;
 

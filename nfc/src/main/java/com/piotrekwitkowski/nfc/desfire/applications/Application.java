@@ -26,7 +26,7 @@ public abstract class Application {
     private final AID aid;
     private final AESKey AESKey0;
 
-    public Application(AID aid, AESKey aesKey0) {
+    protected Application(AID aid, AESKey aesKey0) {
         this.aid = aid;
         AESKey0 = aesKey0;
     }
