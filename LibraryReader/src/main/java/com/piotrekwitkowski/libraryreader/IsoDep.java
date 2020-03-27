@@ -7,7 +7,7 @@ import com.piotrekwitkowski.nfc.ByteUtils;
 
 import java.io.IOException;
 
-public class IsoDep {
+class IsoDep {
     private static final String TAG = "IsoDep";
     private final android.nfc.tech.IsoDep mIsoDep;
 
@@ -15,36 +15,36 @@ public class IsoDep {
         mIsoDep = isoDep;
     }
 
-    public static IsoDep get(Tag tag) {
+    static IsoDep get(Tag tag) {
         return new IsoDep(android.nfc.tech.IsoDep.get(tag));
     }
 
-    public void connect() throws IOException {
+    void connect() throws IOException {
         Log.i(TAG, "connect()");
         mIsoDep.connect();
     }
 
-    public Response transceive(byte command, byte data) throws IOException {
+    Response transceive(byte command, byte data) throws IOException {
         return transceive(ByteUtils.concatenate(command, data));
     }
 
-    public Response transceive(byte command, byte[] data) throws IOException {
+    Response transceive(byte command, byte[] data) throws IOException {
         return transceive(ByteUtils.concatenate(command, data));
     }
 
-    public Response transceive(byte[] data) throws IOException {
+    Response transceive(byte[] data) throws IOException {
         Log.i(TAG, "--> " + ByteUtils.toHexString(data));
         byte[] response = mIsoDep.transceive(data);
         Log.i(TAG, "<-- " + ByteUtils.toHexString(response));
         return new Response(response);
     }
 
-    public void close() throws IOException {
+    void close() throws IOException {
         Log.i(TAG, "close()");
         mIsoDep.close();
     }
 
-    public byte[] getHistoricalBytes() {
+    byte[] getHistoricalBytes() {
         Log.i(TAG, "getHistoricalBytes()");
         return mIsoDep.getHistoricalBytes();
     }
