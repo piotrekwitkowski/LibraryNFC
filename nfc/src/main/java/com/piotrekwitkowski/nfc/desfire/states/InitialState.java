@@ -7,12 +7,14 @@ import com.piotrekwitkowski.nfc.desfire.ResponseCodes;
 import com.piotrekwitkowski.nfc.desfire.aids.AID;
 import com.piotrekwitkowski.nfc.desfire.aids.AIDWrongLengthException;
 import com.piotrekwitkowski.nfc.desfire.applications.Application;
-import com.piotrekwitkowski.nfc.desfire.applications.ApplicationNotFoundException;
-import com.piotrekwitkowski.nfc.desfire.applications.Applications;
+import com.piotrekwitkowski.nfc.desfire.applications.LibraryApplication;
 
 public class InitialState extends State {
     private static final String TAG = "InitialState";
-    private static final Applications applications = new Applications();
+    private static final Application[] applications = new Application[] {
+            new LibraryApplication(),
+            // here other applications
+    };
 
     public CommandResult processCommand(Command command) {
         Log.i(TAG, "processCommand()");
@@ -29,13 +31,22 @@ public class InitialState extends State {
 
         try {
             AID aidToSelect = new AID(aid);
-            Application application = applications.get(aidToSelect);
+            Application application = getApplication(aidToSelect);
             return new CommandResult(new ApplicationSelectedState(application), ResponseCodes.SUCCESS);
         } catch (AIDWrongLengthException ex) {
             return new CommandResult(this, ResponseCodes.LENGTH_ERROR);
         } catch (ApplicationNotFoundException ex) {
             return new CommandResult(this, ResponseCodes.APPLICATION_NOT_FOUND);
         }
+    }
+
+    private Application getApplication(AID aid) throws ApplicationNotFoundException {
+        for (Application a : applications) {
+            if (a.getAid().equals(aid)) {
+                return a;
+            }
+        }
+        throw new ApplicationNotFoundException();
     }
 
 }

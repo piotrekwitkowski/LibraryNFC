@@ -31,7 +31,7 @@ public abstract class Application {
         AESKey0 = aesKey0;
     }
 
-    AID getAid() {
+    public AID getAid() {
         return aid;
     }
 
