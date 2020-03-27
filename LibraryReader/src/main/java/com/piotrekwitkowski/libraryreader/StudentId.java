@@ -78,10 +78,12 @@ class StudentId {
         Log.i(TAG, "Session key: " + ByteUtils.toHexString(sessionKey));
     }
 
-    byte[] readData(byte fileNumber, byte[] offset, byte[] length) throws IOException, DESFireException {
-        byte[] value = DESFireReader.readData(this.isoDep, fileNumber, offset, length);
-        Log.i(TAG, "File value: " + ByteUtils.toHexString(value));
-        return value;
+    byte[] readData(int fileNumber, int offset, int length) throws IOException, DESFireException {
+        byte[] response = DESFireReader.readData(this.isoDep, fileNumber, offset, length);
+        // TODO: check CRC (last 8 bytes)
+        byte[] data = ByteUtils.trimEnd(response, 8);
+        Log.i(TAG, "Data: " + ByteUtils.toHexString(data));
+        return data;
     }
 
 }

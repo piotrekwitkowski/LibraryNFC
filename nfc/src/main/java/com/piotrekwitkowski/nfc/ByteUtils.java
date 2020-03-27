@@ -67,5 +67,16 @@ public class ByteUtils {
         return random;
     }
 
+    public static byte[] first3Bytes(int i) {
+        return new byte[] {
+                (byte)((i) & 0xff),
+                (byte)((i >> 8) & 0xff),
+                (byte)((i >> 16) & 0xff),
+//                (byte)((i >> 24) & 0xff),
+        };
+    }
 
+    public static byte[] trimEnd(byte[] bytes, int i) {
+        return Arrays.copyOfRange(bytes, 0, bytes.length - i);
+    }
 }

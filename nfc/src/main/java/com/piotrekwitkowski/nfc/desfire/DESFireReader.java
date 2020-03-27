@@ -105,12 +105,18 @@ public class DESFireReader {
         return sessionKeyOutputStream.toByteArray();
     }
 
-    public static byte[] readData(IsoDep isoDep, byte fileNumber, byte[] offset, byte[] length) throws IOException, DESFireException {
+    public static byte[] readData(IsoDep isoDep, int fileNumber, int offset, int length) throws IOException, DESFireException {
         Log.i(TAG, "readData()");
 
-        byte[] data = ByteUtils.concatenate(fileNumber, offset);
-        data = ByteUtils.concatenate(data, length);
-        Response response = isoDep.transceive(Commands.READ_DATA, data);
+        // TODO: check if file
+        // TODO: check if offset and length smaller than 3 bytes, else throw Exception
+        byte[] offsetBytes = ByteUtils.first3Bytes(offset);
+        byte[] lengthBytes = ByteUtils.first3Bytes(length);
+
+        byte[] params = ByteUtils.concatenate(offsetBytes, lengthBytes);
+        byte[] commandData = ByteUtils.concatenate((byte) fileNumber, params);
+
+        Response response = isoDep.transceive(Commands.READ_DATA, commandData);
         if (response.getResponseCode() == ResponseCodes.SUCCESS) {
             return response.getData();
         } else {
