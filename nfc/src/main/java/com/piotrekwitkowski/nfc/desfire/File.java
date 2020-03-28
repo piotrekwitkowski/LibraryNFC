@@ -7,6 +7,7 @@ import java.util.Arrays;
 public class File {
     private final byte[] data;
 
+    @SuppressWarnings("SameParameterValue")
     protected File(String data) {
         this.data = ByteUtils.toByteArray(data);
     }

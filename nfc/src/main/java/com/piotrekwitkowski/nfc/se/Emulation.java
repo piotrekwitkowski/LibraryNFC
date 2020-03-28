@@ -4,7 +4,7 @@ import com.piotrekwitkowski.log.Log;
 
 public class Emulation {
     private static final String TAG = "Emulation";
-    private SEWrapper seWrapper;
+    private final SEWrapper seWrapper;
 
     public Emulation(SEWrapper seWrapper) {
         this.seWrapper = seWrapper;

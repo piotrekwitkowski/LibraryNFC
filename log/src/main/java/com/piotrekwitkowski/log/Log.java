@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.widget.TextView;
 
+@SuppressLint("SetTextI18n")
 public class Log {
     @SuppressLint("StaticFieldLeak")
     private static TextView logTextView;

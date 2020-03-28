@@ -19,19 +19,15 @@ import javax.crypto.spec.SecretKeySpec;
 
 public class Authentication {
     private static final String TAG = "ApplicationAuthentication";
-    private final Application application;
-    private AESKey key;
-
+    private final AESKey key;
     private final Cipher cipher;
     private final SecretKeySpec aes;
+
     private byte[] randomBytes;
     private byte[] challenge;
 
-
     public Authentication(Application application) throws NoSuchPaddingException, NoSuchAlgorithmException {
-        this.application = application;
-        this.key = this.application.getKey0();
-
+        this.key = application.getKey0();
         this.cipher = Cipher.getInstance("AES/CBC/NoPadding");
         this.aes = new SecretKeySpec(application.getKey0().getKey(), "AES");
     }

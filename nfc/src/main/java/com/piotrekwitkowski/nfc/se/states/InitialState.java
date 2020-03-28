@@ -39,7 +39,7 @@ public class InitialState extends State {
         }
     }
 
-    ApplicationSelectedState selectApplication(AID aidToSelect) throws ApplicationNotFoundException {
+    private ApplicationSelectedState selectApplication(AID aidToSelect) throws ApplicationNotFoundException {
         Log.i(TAG, "selectApplication()");
         for (Application a : applications) {
             if (a.getAid().equals(aidToSelect)) {

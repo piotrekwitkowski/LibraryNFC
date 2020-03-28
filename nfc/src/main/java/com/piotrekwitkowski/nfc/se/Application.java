@@ -5,7 +5,6 @@ import com.piotrekwitkowski.nfc.desfire.AID;
 import com.piotrekwitkowski.nfc.desfire.File;
 
 public abstract class Application {
-    private static final String TAG = "Application";
     private final AID aid;
     private final AESKey key0;
     private final File file0;

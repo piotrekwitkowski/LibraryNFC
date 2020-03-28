@@ -24,6 +24,7 @@ class IsoDep {
         mIsoDep.connect();
     }
 
+    @SuppressWarnings("SameParameterValue")
     Response transceive(byte command, byte data) throws IOException {
         return transceive(ByteUtils.concatenate(command, data));
     }
