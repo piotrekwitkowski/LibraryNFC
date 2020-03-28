@@ -5,15 +5,15 @@ import com.piotrekwitkowski.nfc.se.states.CommandResult;
 import com.piotrekwitkowski.nfc.se.states.InitialState;
 import com.piotrekwitkowski.nfc.se.states.State;
 
-public class SEWrapper {
+public class SecureElement {
     private static final String TAG = "SoftwareSEWrapper";
     private State state;
 
-    public SEWrapper(Application[] applications) {
+    public SecureElement(Application[] applications) {
         this.state = new InitialState(applications);
     }
 
-    public byte[] processCommand(Command command) {
+    byte[] processCommand(Command command) {
         Log.i(TAG, "processCommand()");
 
         CommandResult result = this.state.processCommand(command);

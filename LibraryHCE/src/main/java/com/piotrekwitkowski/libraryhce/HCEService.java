@@ -3,7 +3,7 @@ package com.piotrekwitkowski.libraryhce;
 import android.nfc.cardemulation.HostApduService;
 import android.os.Bundle;
 
-import com.piotrekwitkowski.nfc.se.SEWrapper;
+import com.piotrekwitkowski.nfc.se.SecureElement;
 import com.piotrekwitkowski.log.Log;
 import com.piotrekwitkowski.nfc.ByteUtils;
 import com.piotrekwitkowski.nfc.Iso7816;
@@ -42,7 +42,7 @@ public class HCEService extends HostApduService {
     private Emulation getEmulation() throws InvalidParameterException {
         Application libraryApplication = new LibraryApplication();
         Application[] applications = new Application[] {libraryApplication};
-        SEWrapper seWrapper = new SEWrapper(applications);
+        SecureElement seWrapper = new SecureElement(applications);
         return new Emulation(seWrapper);
     }
 
