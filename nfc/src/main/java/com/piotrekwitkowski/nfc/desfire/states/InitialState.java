@@ -7,13 +7,14 @@ import com.piotrekwitkowski.nfc.desfire.ResponseCodes;
 import com.piotrekwitkowski.nfc.desfire.AID;
 import com.piotrekwitkowski.nfc.desfire.InvalidParameterException;
 import com.piotrekwitkowski.nfc.desfire.Application;
+import com.piotrekwitkowski.nfc.se.SEWrapper;
 
 public class InitialState extends State {
     private static final String TAG = "InitialState";
-    private final Application[] applications;
+    private final SEWrapper seWrapper;
 
-    public InitialState(Application[] applications) {
-        this.applications = applications;
+    public InitialState(SEWrapper seWrapper) {
+        this.seWrapper = seWrapper;
     }
 
     public CommandResult processCommand(Command command) {
@@ -31,22 +32,12 @@ public class InitialState extends State {
 
         try {
             AID aidToSelect = new AID(aid);
-            Application application = getApplication(aidToSelect);
-            return new CommandResult(new ApplicationSelectedState(application), ResponseCodes.SUCCESS);
+            return new CommandResult(seWrapper.selectApplication(aidToSelect), ResponseCodes.SUCCESS);
         } catch (InvalidParameterException ex) {
             return new CommandResult(this, ResponseCodes.LENGTH_ERROR);
         } catch (ApplicationNotFoundException ex) {
             return new CommandResult(this, ResponseCodes.APPLICATION_NOT_FOUND);
         }
-    }
-
-    private Application getApplication(AID aid) throws ApplicationNotFoundException {
-        for (Application a : applications) {
-            if (a.getAid().equals(aid)) {
-                return a;
-            }
-        }
-        throw new ApplicationNotFoundException();
     }
 
 }

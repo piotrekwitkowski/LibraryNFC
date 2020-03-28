@@ -4,14 +4,14 @@ import com.piotrekwitkowski.log.Log;
 import com.piotrekwitkowski.nfc.desfire.states.CommandResult;
 import com.piotrekwitkowski.nfc.desfire.states.State;
 import com.piotrekwitkowski.nfc.desfire.states.InitialState;
+import com.piotrekwitkowski.nfc.se.SEWrapper;
 
 public class DESFireEmulation {
     private static final String TAG = "DESFireEmulation";
     private State state;
 
-    public DESFireEmulation(Application application) {
-        Application[] applications = new Application[] {application};
-        this.state = new InitialState(applications);
+    public DESFireEmulation(SEWrapper seWrapper) {
+        this.state = new InitialState(seWrapper);
     }
 
     public byte[] getResponse(byte[] apdu) {

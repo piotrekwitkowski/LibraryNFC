@@ -2,8 +2,8 @@ package com.piotrekwitkowski.nfc.desfire.states;
 
 // https://youtrack.jetbrains.com/issue/IDEA-209050
 @SuppressWarnings("WeakerAccess")
-class ApplicationNotFoundException extends Exception {
-    ApplicationNotFoundException() {
+public class ApplicationNotFoundException extends Exception {
+    public ApplicationNotFoundException() {
         super("Application not found");
     }
 }

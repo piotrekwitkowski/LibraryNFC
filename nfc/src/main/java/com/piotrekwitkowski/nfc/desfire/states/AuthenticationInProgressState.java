@@ -6,6 +6,7 @@ import com.piotrekwitkowski.nfc.desfire.Command;
 import com.piotrekwitkowski.nfc.desfire.ResponseCodes;
 import com.piotrekwitkowski.nfc.desfire.Application;
 import com.piotrekwitkowski.nfc.desfire.AESKey;
+import com.piotrekwitkowski.nfc.se.AuthenticationException;
 
 import java.io.ByteArrayOutputStream;
 import java.security.Key;
@@ -21,10 +22,8 @@ public class AuthenticationInProgressState extends State {
     private final byte[] B;
     private final byte[] cardChallenge;
     private final AESKey key;
-    private final State oldState;
 
-    public AuthenticationInProgressState(State state, Application application, AESKey key, byte[] B, byte[] challenge) {
-        this.oldState = state;
+    public AuthenticationInProgressState(Application application, AESKey key, byte[] B, byte[] challenge) {
         this.application = application;
         this.key = key;
         this.B = B;
@@ -66,7 +65,7 @@ public class AuthenticationInProgressState extends State {
         // byte left). If this fails the authentication has failed. If it matches, the card knows
         // the reader has the right key.
         if (!Arrays.equals(ByteUtils.last16Bytes(C), ByteUtils.rotateOneLeft(B))) {
-            return new CommandResult(oldState, ResponseCodes.AUTHENTICATION_ERROR);
+            throw new AuthenticationException();
         }
 
         // 10. The card rotates the first 16 bytes (A) left by one byte.
