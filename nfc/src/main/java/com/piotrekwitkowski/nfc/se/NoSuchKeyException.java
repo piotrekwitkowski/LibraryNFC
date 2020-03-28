@@ -1,4 +1,4 @@
 package com.piotrekwitkowski.nfc.se;
 
-class NoSuchKeyException extends Exception {
+public class NoSuchKeyException extends Exception {
 }
