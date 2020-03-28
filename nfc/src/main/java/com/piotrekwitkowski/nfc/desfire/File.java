@@ -11,7 +11,7 @@ public class File {
         this.data = ByteUtils.toByteArray(data);
     }
 
-    public byte[] readData(int offset, int length) {
+    public byte[] readData(int offset, int length) throws ArrayIndexOutOfBoundsException, IllegalArgumentException, NullPointerException {
         if (length == 0) {
             return Arrays.copyOfRange(data, offset, data.length);
         } else {
