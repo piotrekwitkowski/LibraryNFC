@@ -3,11 +3,11 @@ package com.piotrekwitkowski.libraryhce;
 import android.nfc.cardemulation.HostApduService;
 import android.os.Bundle;
 
-import com.piotrekwitkowski.libraryhce.se.SoftwareSEWrapper;
+import com.piotrekwitkowski.nfc.se.SoftwareSEWrapper;
 import com.piotrekwitkowski.log.Log;
 import com.piotrekwitkowski.nfc.ByteUtils;
 import com.piotrekwitkowski.nfc.Iso7816;
-import com.piotrekwitkowski.nfc.desfire.Application;
+import com.piotrekwitkowski.nfc.se.Application;
 import com.piotrekwitkowski.nfc.desfire.DESFireEmulation;
 import com.piotrekwitkowski.nfc.desfire.InvalidParameterException;
 import com.piotrekwitkowski.libraryhce.application.LibraryApplication;

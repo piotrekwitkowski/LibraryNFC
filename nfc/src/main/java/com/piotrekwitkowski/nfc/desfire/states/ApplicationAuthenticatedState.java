@@ -6,15 +6,16 @@ import com.piotrekwitkowski.nfc.desfire.Command;
 import com.piotrekwitkowski.nfc.desfire.Commands;
 import com.piotrekwitkowski.nfc.desfire.File;
 import com.piotrekwitkowski.nfc.desfire.ResponseCodes;
-import com.piotrekwitkowski.nfc.desfire.Application;
+import com.piotrekwitkowski.nfc.se.Application;
 
 @SuppressWarnings("FieldCanBeLocal")
+public
 class ApplicationAuthenticatedState extends State {
     private static final String TAG = "ApplicationAuthenticatedState";
     private final Application application;
     private final byte[] sessionKey;
 
-    ApplicationAuthenticatedState(Application application, byte[] sessionKey) {
+    public ApplicationAuthenticatedState(Application application, byte[] sessionKey) {
         this.application = application;
         this.sessionKey = sessionKey;
     }

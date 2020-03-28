@@ -6,7 +6,6 @@ import com.piotrekwitkowski.nfc.desfire.Commands;
 import com.piotrekwitkowski.nfc.desfire.ResponseCodes;
 import com.piotrekwitkowski.nfc.desfire.AID;
 import com.piotrekwitkowski.nfc.desfire.InvalidParameterException;
-import com.piotrekwitkowski.nfc.desfire.Application;
 import com.piotrekwitkowski.nfc.se.SEWrapper;
 
 public class InitialState extends State {

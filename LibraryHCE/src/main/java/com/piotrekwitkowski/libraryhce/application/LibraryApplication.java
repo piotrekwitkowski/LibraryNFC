@@ -1,7 +1,7 @@
 package com.piotrekwitkowski.libraryhce.application;
 
 import com.piotrekwitkowski.nfc.desfire.InvalidParameterException;
-import com.piotrekwitkowski.nfc.desfire.Application;
+import com.piotrekwitkowski.nfc.se.Application;
 
 public class LibraryApplication extends Application {
     public LibraryApplication() throws InvalidParameterException {
