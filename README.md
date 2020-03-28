@@ -2,7 +2,7 @@
 is a school project to emulate NXP's MIFARE DESFire-based library ID cards with Android's Host Card Emulation.
 
 ## LibraryHCE
-This module offers emulation of a contactless library ID card. Emulation uses native MIFARE DESFire command set.
+This module offers emulation of a contactless library ID card. Emulation uses native MIFARE DESFire command set. The DESFire protocol implemented here is [this reverse engineered version](https://github.com/revk/DESFireAES/blob/master/DESFire.pdf). 
 
 [See the list of supported commands.](nfc/src/main/java/com/piotrekwitkowski/nfc/desfire/Commands.java)
 
