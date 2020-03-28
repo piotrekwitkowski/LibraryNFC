@@ -25,3 +25,8 @@ The data (Application AID, AES key, Data Files) of the emulated DESFire Applicat
 
 ### Library ID reader
 The data (Application AID and AES key) of the Reader module can be configured [here](LibraryReader/src/main/java/com/piotrekwitkowski/libraryreader/LibraryReader.java).
+
+## Deployment
+To deploy the applications two NFC-capable Android phones are needed. My setup included motorola one (Emulator) and Nexus 4 (Reader). I have tested emulation with some Sony and Huawei phones and it didn't work so well. You can use [CTSVerifier](https://source.android.com/compatibility/cts/verifier) to test your phone's NFC capabilities.
+
+I was using Android Studio version 3.6.1.
