@@ -1,4 +1,4 @@
-package com.piotrekwitkowski.nfc.desfire.states;
+package com.piotrekwitkowski.nfc.se.states;
 
 // https://youtrack.jetbrains.com/issue/IDEA-209050
 @SuppressWarnings("WeakerAccess")

@@ -1,6 +1,6 @@
 package com.piotrekwitkowski.nfc.se;
 
-class AuthenticationResponse {
+public class AuthenticationResponse {
     private final byte[] sessionKey;
     private final byte[] encryptedRotatedA;
 
@@ -9,11 +9,11 @@ class AuthenticationResponse {
         this.encryptedRotatedA = encryptedRotatedA;
     }
 
-    byte[] getSessionKey() {
+    public byte[] getSessionKey() {
         return this.sessionKey;
     }
 
-    byte[] getEncryptedRotatedA() {
+    public byte[] getEncryptedRotatedA() {
         return encryptedRotatedA;
     }
 }

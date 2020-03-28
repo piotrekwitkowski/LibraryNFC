@@ -1,4 +1,4 @@
-package com.piotrekwitkowski.nfc.desfire.states;
+package com.piotrekwitkowski.nfc.se.states;
 
 class CommandDataLengthException extends Exception {
 }

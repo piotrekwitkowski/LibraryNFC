@@ -17,7 +17,7 @@ import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
-class Authentication {
+public class Authentication {
     private static final String TAG = "ApplicationAuthentication";
     private final Application application;
     private AESKey key;
@@ -28,7 +28,7 @@ class Authentication {
     private byte[] challenge;
 
 
-    Authentication(Application application) throws NoSuchPaddingException, NoSuchAlgorithmException {
+    public Authentication(Application application) throws NoSuchPaddingException, NoSuchAlgorithmException {
         this.application = application;
         this.key = this.application.getKey0();
 
@@ -36,7 +36,7 @@ class Authentication {
         this.aes = new SecretKeySpec(application.getKey0().getKey(), "AES");
     }
 
-    byte[] initiate(byte keyNumber) throws InvalidAlgorithmParameterException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException, NoSuchKeyException {
+    public byte[] initiate(byte keyNumber) throws InvalidAlgorithmParameterException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException, NoSuchKeyException {
         // 1. The reader asked for AES authentication for a specific key.
         if (keyNumber != 0) {
             throw new NoSuchKeyException();
@@ -52,7 +52,7 @@ class Authentication {
         return challenge;
     }
 
-    AuthenticationResponse proceed(byte[] readerChallenge) throws InvalidAlgorithmParameterException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException, AuthenticationException {
+    public AuthenticationResponse proceed(byte[] readerChallenge) throws InvalidAlgorithmParameterException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException, AuthenticationException {
         // 3. The reader receives the 16 bytes, and decrypts it using the AES key to get back the
         // original 16 byte random number (B). This is decrypted with an IV of all 00 bytes.
         // 4. The reader generates its own 16 byte random number (A).

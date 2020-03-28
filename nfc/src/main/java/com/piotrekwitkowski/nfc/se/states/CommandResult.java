@@ -1,10 +1,10 @@
-package com.piotrekwitkowski.nfc.desfire.states;
+package com.piotrekwitkowski.nfc.se.states;
 
 public class CommandResult {
     private final State state;
     private final byte[] response;
 
-    public CommandResult(State state, byte responseCode) {
+    CommandResult(State state, byte responseCode) {
         this.state = state;
         this.response = new byte[]{responseCode};
     }

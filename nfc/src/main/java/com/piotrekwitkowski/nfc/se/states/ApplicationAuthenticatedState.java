@@ -1,21 +1,19 @@
-package com.piotrekwitkowski.nfc.desfire.states;
+package com.piotrekwitkowski.nfc.se.states;
 
 import com.piotrekwitkowski.log.Log;
 import com.piotrekwitkowski.nfc.ByteUtils;
-import com.piotrekwitkowski.nfc.desfire.Command;
+import com.piotrekwitkowski.nfc.se.Command;
 import com.piotrekwitkowski.nfc.desfire.Commands;
 import com.piotrekwitkowski.nfc.desfire.File;
 import com.piotrekwitkowski.nfc.desfire.ResponseCodes;
 import com.piotrekwitkowski.nfc.se.Application;
 
-@SuppressWarnings("FieldCanBeLocal")
-public
-class ApplicationAuthenticatedState extends State {
+public class ApplicationAuthenticatedState extends State {
     private static final String TAG = "ApplicationAuthenticatedState";
     private final Application application;
     private final byte[] sessionKey;
 
-    public ApplicationAuthenticatedState(Application application, byte[] sessionKey) {
+    ApplicationAuthenticatedState(Application application, byte[] sessionKey) {
         this.application = application;
         this.sessionKey = sessionKey;
     }
@@ -62,6 +60,9 @@ class ApplicationAuthenticatedState extends State {
     }
 
     private byte[] getCRC(byte[] data) {
+        Log.i(TAG, "sessionKey: " + ByteUtils.toHexString(sessionKey));
+        Log.i(TAG, "generating CRC for: " + ByteUtils.toHexString(data));
+
         // TODO: implement CRC
         return new byte[8];
     }

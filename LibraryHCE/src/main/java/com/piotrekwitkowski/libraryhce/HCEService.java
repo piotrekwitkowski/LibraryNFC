@@ -3,20 +3,19 @@ package com.piotrekwitkowski.libraryhce;
 import android.nfc.cardemulation.HostApduService;
 import android.os.Bundle;
 
-import com.piotrekwitkowski.nfc.se.SoftwareSEWrapper;
+import com.piotrekwitkowski.nfc.se.SEWrapper;
 import com.piotrekwitkowski.log.Log;
 import com.piotrekwitkowski.nfc.ByteUtils;
 import com.piotrekwitkowski.nfc.Iso7816;
 import com.piotrekwitkowski.nfc.se.Application;
-import com.piotrekwitkowski.nfc.desfire.DESFireEmulation;
+import com.piotrekwitkowski.nfc.se.Emulation;
 import com.piotrekwitkowski.nfc.desfire.InvalidParameterException;
 import com.piotrekwitkowski.libraryhce.application.LibraryApplication;
-import com.piotrekwitkowski.nfc.se.SEWrapper;
 
 public class HCEService extends HostApduService {
     private static final String TAG = "HCEService";
     private static boolean firstInteraction = true;
-    private static DESFireEmulation emulation;
+    private static Emulation emulation;
     private final NotificationService notifications = new NotificationService(this);
 
     @Override
@@ -40,11 +39,11 @@ public class HCEService extends HostApduService {
         }
     }
 
-    private DESFireEmulation getEmulation() throws InvalidParameterException {
+    private Emulation getEmulation() throws InvalidParameterException {
         Application libraryApplication = new LibraryApplication();
         Application[] applications = new Application[] {libraryApplication};
-        SEWrapper seWrapper = new SoftwareSEWrapper(applications);
-        return new DESFireEmulation(seWrapper);
+        SEWrapper seWrapper = new SEWrapper(applications);
+        return new Emulation(seWrapper);
     }
 
     private byte[] getNextResponse(byte[] command) {

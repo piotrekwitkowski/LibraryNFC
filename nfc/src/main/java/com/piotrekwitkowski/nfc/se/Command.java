@@ -1,4 +1,4 @@
-package com.piotrekwitkowski.nfc.desfire;
+package com.piotrekwitkowski.nfc.se;
 
 import java.util.Arrays;
 
