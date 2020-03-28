@@ -1,5 +1,6 @@
 package com.piotrekwitkowski.nfc;
 
+import java.nio.ByteBuffer;
 import java.security.SecureRandom;
 import java.util.Arrays;
 
@@ -74,6 +75,16 @@ public class ByteUtils {
                 (byte)((i >> 16) & 0xff),
 //                (byte)((i >> 24) & 0xff),
         };
+    }
+
+    public static int threeBytesToInt(byte[] bytes) {
+        byte[] moreBytes = new byte[] {
+                (byte) 0x00,
+                bytes[2],
+                bytes[1],
+                bytes[0],
+        };
+        return ByteBuffer.wrap(moreBytes).getInt();
     }
 
     public static byte[] trimEnd(byte[] bytes, int i) {

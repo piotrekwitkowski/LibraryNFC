@@ -5,6 +5,6 @@ import com.piotrekwitkowski.nfc.desfire.Application;
 
 public class LibraryApplication extends Application {
     public LibraryApplication() throws InvalidParameterException {
-        super(new LibraryAID(), new LibraryAESKey0());
+        super(new LibraryAID(), new LibraryAESKey0(), new LibraryFile0());
     }
 }

@@ -22,15 +22,19 @@ public abstract class Application {
     private static final String TAG = "Application";
     private final AID aid;
     private final AESKey AESKey0;
+    private final File file0;
 
-    protected Application(AID aid, AESKey aesKey0) {
+    protected Application(AID aid, AESKey aesKey0, File file0) {
         this.aid = aid;
-        AESKey0 = aesKey0;
+        this.AESKey0 = aesKey0;
+        this.file0 = file0;
     }
 
     public AID getAid() {
         return aid;
     }
+
+    public File getFile0() { return file0; }
 
     public CommandResult initiateAESAuthentication(State state, byte keyNumber) {
         Log.i(TAG, "initiateAESAuthentication()");
