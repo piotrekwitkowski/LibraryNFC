@@ -118,6 +118,8 @@ class DESFireReader {
         Response response = isoDep.transceive(Commands.READ_DATA, commandData);
         if (response.getResponseCode() == ResponseCodes.SUCCESS) {
             return response.getData();
+        } else if (response.getResponseCode() == ResponseCodes.BOUNDARY_ERROR) {
+            throw new DESFireReaderException("Boundary error!");
         } else {
             throw new DESFireReaderException("readData failed. Response status: " + response.getResponseCode());
         }
