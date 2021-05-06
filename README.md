@@ -30,3 +30,6 @@ The data (Application AID and AES key) of the Reader module can be configured [h
 To deploy the applications two NFC-capable Android phones are needed. My setup included motorola one (Emulator) and Nexus 4 (Reader). I have tested emulation with some Sony and Huawei phones and it didn't work so well. You can use [CTSVerifier](https://source.android.com/compatibility/cts/verifier) to test your phone's NFC capabilities.
 
 I was using Android Studio version 3.6.1.
+
+## Issues
+Although I don't plan to update the app anytime soon, feel free to open Issues if you need clarification or help with NFC. I'd like to thank this way for many others that provided me with resources. Please consider starring the repo if you like it!
