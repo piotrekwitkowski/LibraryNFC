@@ -18,7 +18,7 @@ Its [programmed use-case](LibraryReader/src/main/java/com/piotrekwitkowski/libra
 ## Configuration
 
 ### [HCE AID](https://developer.android.com/guide/topics/connectivity/nfc/hce#ManifestDeclaration)
-The "Android" AID used by both HCE and Reader Android applications can be configured in the [values.xml](nfc/src/main/res/values.xml) file of the nfc helper library.
+The "Android" AID used by both HCE and Reader Android applications can be configured in the [strings.xml](nfc/src/main/res/values/strings.xml) file of the nfc helper library.
 
 ### Emulated library ID
 The data (Application AID, AES key, Data Files) of the emulated DESFire Application can be configured [here](LibraryHCE/src/main/java/com/piotrekwitkowski/libraryhce/application).
